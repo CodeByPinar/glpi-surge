@@ -3,28 +3,21 @@
 </p>
 
 <p align="center">
-  <a href="https://glpi-project.org"><img alt="GLPI 11 | 12" src="https://img.shields.io/badge/GLPI-11%20%7C%2012-0e2a4e?style=flat-square"></a>
-  <img alt="PHP 8.2+" src="https://img.shields.io/badge/PHP-8.2%2B-777bb4?style=flat-square&logo=php&logoColor=white">
-  <a href="LICENSE"><img alt="License: GPL-3.0-or-later" src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue?style=flat-square"></a>
-  <a href="https://github.com/CodeByPinar/glpi-surge/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/CodeByPinar/glpi-surge?style=flat-square&color=e8590c"></a>
-  <img alt="Languages: English, Turkish" src="https://img.shields.io/badge/i18n-EN%20%C2%B7%20TR-2fb344?style=flat-square">
-  <img alt="No external services" src="https://img.shields.io/badge/external%20calls-none-555?style=flat-square">
+  <a href="https://github.com/CodeByPinar/glpi-surge/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badges-dark.svg"><img src="docs/readme/badges-light.svg" alt="Surge release · GLPI 11 and 12 · PHP 8.2+ · GPL-3.0 · English and Turkish · no external calls"></picture></a>
 </p>
 
 <p align="center">
-  <b>Spot outages from the ticket queue while they are happening — and handle thirty tickets as one incident.</b>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/tagline-dark.svg"><img src="docs/readme/tagline-light.svg" alt="Spot outages from the ticket queue while they are happening — and handle thirty tickets as one incident."></picture>
 </p>
 
 <p align="center">
-  <a href="#-why-surge">Why</a> ·
-  <a href="#-features">Features</a> ·
-  <a href="#-screenshots">Screenshots</a> ·
-  <a href="#%EF%B8%8F-how-it-works">How it works</a> ·
-  <a href="#-installation">Installation</a> ·
-  <a href="#-quick-start">Quick start</a> ·
-  <a href="#%EF%B8%8F-configuration">Configuration</a> ·
-  <a href="#-faq">FAQ</a> ·
-  <a href="#%EF%B8%8F-roadmap">Roadmap</a>
+  <a href="#-why-surge"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/nav-why-dark.svg"><img src="docs/readme/nav-why-light.svg" alt="Why"></picture></a>
+  <a href="#-features"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/nav-features-dark.svg"><img src="docs/readme/nav-features-light.svg" alt="Features"></picture></a>
+  <a href="#%EF%B8%8F-how-it-works"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/nav-how-dark.svg"><img src="docs/readme/nav-how-light.svg" alt="How it works"></picture></a>
+  <a href="#-installation"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/nav-install-dark.svg"><img src="docs/readme/nav-install-light.svg" alt="Installation"></picture></a>
+  <a href="#%EF%B8%8F-configuration"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/nav-config-dark.svg"><img src="docs/readme/nav-config-light.svg" alt="Configuration"></picture></a>
+  <a href="#-faq"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/nav-faq-dark.svg"><img src="docs/readme/nav-faq-light.svg" alt="FAQ"></picture></a>
+  <a href="#%EF%B8%8F-roadmap"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/nav-roadmap-dark.svg"><img src="docs/readme/nav-roadmap-light.svg" alt="Roadmap"></picture></a>
 </p>
 
 ---
@@ -456,7 +449,8 @@ tests/                   integration tests and demo data for a GLPI test instanc
   test instance.
 - **Translations.** `python tools/i18n.py` extracts strings to `locales/surge.pot`, merges translations from
   `tools/<lang>.json` and compiles the `.mo` files. No gettext tools are needed.
-- **Release.** Bump `PLUGIN_SURGE_VERSION` and the changelog, then push a tag `vX.Y.Z`. GitHub Actions builds the
+- **Release.** Bump `PLUGIN_SURGE_VERSION` and the changelog, run `python tools/readme_assets.py` (header badges), then push
+  a tag `vX.Y.Z`. GitHub Actions builds the
   archives (`tools/package.py`), publishes the GitHub Release and pushes the GLPI 11 / 12 Docker images to GHCR.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes and add a language.
