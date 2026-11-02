@@ -59,6 +59,7 @@ final class TicketHooks
             }
             Surge::setStatus($sid, Surge::RESOLVED);
             Notifier::send('resolved', $sid);
+            Events::fire('resolved', $sid, ['via_master' => true]);
         } finally {
             self::$cascading = false;
         }

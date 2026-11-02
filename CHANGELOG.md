@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0] — 2026-11-02
+
+- **Extension points** for other plugins: `surge_event` (detected, ticket joined, acknowledged, master, problem,
+  broadcast, resolved, dismissed, reopened, notices, ticket removed), `surge_tabs` (add a tab to the Surge pages) and
+  `surge_page` (add content to a surge page). See [docs/EXTENDING.md](docs/EXTENDING.md). A failing listener is
+  logged and never breaks Surge.
+- Fix: *Solve all tickets* on a surge with a master ticket reported "0 ticket(s) solved" — members solved through the
+  master now count.
+
 ## [0.2.0] — 2026-11-02
 
 Everything from the 0.1 roadmap.

@@ -53,11 +53,13 @@ final class Ui
             $tabs['oncall'] = [__('On-call', 'surge'), 'ti ti-phone-call'];
             $tabs['config'] = [__('Settings', 'surge'), 'ti ti-adjustments'];
         }
+        $tabs = Events::tabs($tabs);
         echo "<div class='surge container-fluid px-0'><div class='surge-head'><h2><i class='ti ti-bolt'></i> Surge</h2>"
             . "<span class='text-muted'>" . self::e(__('Bursts of similar tickets, handled as one major incident', 'surge')) . "</span></div>";
         echo "<ul class='nav nav-pills surge-nav mb-3'>";
-        foreach ($tabs as $k => [$label, $icon]) {
-            echo "<li class='nav-item'><a class='nav-link" . ($k === $active ? ' active' : '') . "' href='" . self::e(self::url($k)) . "'><i class='{$icon}'></i> " . self::e($label) . "</a></li>";
+        foreach ($tabs as $k => $tab) {
+            [$label, $icon] = $tab;
+            echo "<li class='nav-item'><a class='nav-link" . ($k === $active ? ' active' : '') . "' href='" . self::e($tab[2] ?? self::url($k)) . "'><i class='{$icon}'></i> " . self::e($label) . "</a></li>";
         }
         echo "</ul>";
     }

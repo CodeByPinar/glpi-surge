@@ -43,6 +43,7 @@ final class Detector
         }
         foreach ($created as $sid) {
             Notifier::send('detected', $sid);
+            Events::fire('detected', $sid);
             try {
                 Mailer::surgeDetected($sid); // fixed recipients + whoever is on call
             } catch (\Throwable $e) {
@@ -175,6 +176,7 @@ final class Detector
                 $score = $cent ? $mix(Text::cosine($vec[$id], $cent), $ecent && isset($emb[$id]) ? Embeddings::cosine($emb[$id], $ecent) : null) : 1.0;
                 if ($score >= $min) {
                     Surge::addTicket($sid, $id, $score);
+                    Events::fire('ticket_joined', $sid, ['tickets_id' => $id]);
                     $grown[$sid] = ($grown[$sid] ?? 0) + 1;
                     unset($cand[$id]);
                 }

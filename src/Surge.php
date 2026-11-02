@@ -294,6 +294,7 @@ class Surge extends CommonGLPI
         $s = self::get($sid);
         if ($s && $s['status'] === self::NEW) {
             self::touch($sid, ['status' => self::ACTIVE, 'users_id_ack' => (int) Session::getLoginUserID(), 'date_ack' => date('Y-m-d H:i:s')]);
+            Events::fire('acknowledged', $sid);
         }
     }
 
@@ -355,6 +356,7 @@ class Surge extends CommonGLPI
         self::touch($sid, ['tickets_id_master' => $id]);
         self::acknowledge($sid);
         Notifier::send('master', $sid);
+        Events::fire('master', $sid, ['tickets_id' => $id]);
         return $id;
     }
 
@@ -388,6 +390,7 @@ class Surge extends CommonGLPI
         }
         self::touch($sid, ['problems_id' => $id]);
         self::acknowledge($sid);
+        Events::fire('problem', $sid, ['problems_id' => $id]);
         return $id;
     }
 
@@ -421,6 +424,7 @@ class Surge extends CommonGLPI
             }
         }
         self::acknowledge($sid);
+        Events::fire('broadcast', $sid, ['done' => $n, 'html' => $html]);
         return [$n, $skipped];
     }
 
@@ -428,7 +432,7 @@ class Surge extends CommonGLPI
     public static function resolveAll(int $sid, string $html): array
     {
         $s = self::get($sid);
-        $n = 0;
+        $before = count(self::openTickets($sid)[0]);
         if ($s && (int) $s['tickets_id_master'] > 0) {
             $m = new Ticket();
             if ($m->getFromDB((int) $s['tickets_id_master']) && !in_array((int) $m->fields['status'], [CommonITILObject::SOLVED, CommonITILObject::CLOSED], true) && $m->canUpdateItem()) {
@@ -437,12 +441,13 @@ class Surge extends CommonGLPI
         }
         [$list, $skipped] = self::openTickets($sid);
         foreach ($list as $t) {
-            if ((new ITILSolution())->add(['itemtype' => 'Ticket', 'items_id' => $t->getID(), 'content' => $html])) {
-                $n++;
-            }
+            (new ITILSolution())->add(['itemtype' => 'Ticket', 'items_id' => $t->getID(), 'content' => $html]);
         }
+        // members solved by the master's cascade count too
+        $n = $before - count(self::openTickets($sid)[0]);
         self::touch($sid, ['status' => self::RESOLVED, 'date_resolved' => date('Y-m-d H:i:s')]);
         Notifier::send('resolved', $sid);
+        Events::fire('resolved', $sid, ['solved' => $n]);
         return [$n, $skipped];
     }
 
@@ -450,6 +455,9 @@ class Surge extends CommonGLPI
     {
         if (isset(self::statuses()[$status])) {
             self::touch($sid, ['status' => $status] + ($status === self::RESOLVED ? ['date_resolved' => date('Y-m-d H:i:s')] : []));
+            if ($status === self::DISMISSED || $status === self::ACTIVE) {
+                Events::fire($status === self::DISMISSED ? 'dismissed' : 'reopened', $sid);
+            }
         }
     }
 
@@ -460,6 +468,7 @@ class Surge extends CommonGLPI
         global $DB;
         $DB->update(self::ITEMS, ['is_removed' => 1], ['surges_id' => $sid, 'tickets_id' => $tid]);
         self::refresh($sid);
+        Events::fire('ticket_removed', $sid, ['tickets_id' => $tid]);
     }
 
     // ------------------------------------------------------------------ public notice (self-service portal)
@@ -477,11 +486,13 @@ class Surge extends CommonGLPI
             throw new \RuntimeException(__('Write the notice first.', 'surge'));
         }
         self::touch($sid, ['public_message' => $message, 'is_public' => 1, 'date_public' => date('Y-m-d H:i:s')]);
+        Events::fire('notice_published', $sid, ['message' => $message]);
     }
 
     public static function unpublishNotice(int $sid): void
     {
         self::touch($sid, ['is_public' => 0]);
+        Events::fire('notice_withdrawn', $sid);
     }
 
     /**

@@ -474,7 +474,7 @@ The surge pages are for central-interface profiles with the Surge rights.
 
 | | GLPI 11.0.x | GLPI 12.0.x |
 |---|:---:|:---:|
-| Surge 0.1 – 0.2 | ✅ tested | ✅ tested |
+| Surge 0.1 – 0.3 | ✅ tested | ✅ tested |
 
 Tested with MariaDB / MySQL as shipped with GLPI. The same archive installs on both versions.
 
@@ -512,6 +512,7 @@ src/Surge.php            surge data, actions, automatic action
 src/Rule.php · Config.php   detection rules, settings
 src/TicketHooks.php      detection on ticket creation, cascading solutions, ticket banner
 src/Notifier.php         webhooks
+src/Events.php           extension points for other plugins (docs/EXTENDING.md)
 src/Mailer.php · OnCall.php   e-mail through GLPI's queue, on-call rota
 src/Embeddings.php       optional semantic similarity (OpenAI-compatible /v1/embeddings, cached vectors)
 front/                   pages (surges, surge, statistics, rules, on-call, settings, notice JSON)
@@ -523,6 +524,7 @@ tests/                   integration tests and demo data for a GLPI test instanc
 - **Tests.** `tests/surge_test.php` has 27 checks: text processing, detection, every action and the cascade.
   `tests/surge_v2_test.php` has 36: languages, on-call slots, e-mail queue, notices, statistics, semantic matching
   (with `tests/embed_mock.py`).
+  `tests/surge_v3_test.php` has 14: the extension points.
   `tests/surge_pages.sh` has 42: every page, every POST action and the rights. Both pass on GLPI 11 and 12. They expect
   a disposable GLPI instance with a small CLI boot helper. **Never run them on production.**
 - **Demo data.** `php tests/demo.php <instance> create` (and `clean`) builds the scenario used in the screenshots on a
@@ -532,6 +534,8 @@ tests/                   integration tests and demo data for a GLPI test instanc
 - **Release.** Bump `PLUGIN_SURGE_VERSION` and the changelog, run `python tools/readme_assets.py` (header badges), then push
   a tag `vX.Y.Z`. GitHub Actions builds the
   archives (`tools/package.py`), publishes the GitHub Release and pushes the GLPI 11 / 12 Docker images to GHCR.
+
+- **Extending.** Other plugins can listen to surge events and add tabs or cards: see [docs/EXTENDING.md](docs/EXTENDING.md).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes and add a language.
 

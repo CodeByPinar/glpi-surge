@@ -105,7 +105,11 @@ try {
     $nt = array_values(array_filter(Surge::notices(), static fn($x) => $x['id'] === $sid));
     $ok(count($nt) === 1 && str_contains($nt[0]['message'], 'mail outage') && !$nt[0]['resolved'], 'published notice is visible', $nt);
     $ok(!str_contains(json_encode(Surge::notices()), 'Outlook won'), 'notice exposes no ticket titles');
-    Surge::resolveAll($sid, '<p>S2· fixed</p>');
+    // with a master ticket the members are solved by the cascade; they must still be counted
+    $members = (int) Surge::get($sid)['ticket_count'];
+    $made['tickets'][] = Surge::createMaster($sid, 'S2· [Major incident] mail');
+    [$done] = Surge::resolveAll($sid, '<p>S2· fixed</p>');
+    $ok($done === $members, 'solve all with a master counts the members solved by the cascade', [$done, $members]);
     $nt = array_values(array_filter(Surge::notices(), static fn($x) => $x['id'] === $sid));
     $ok(count($nt) === 1 && $nt[0]['resolved'] && str_contains($nt[0]['message'], 'mail outage') && !str_contains($nt[0]['message'], 'Outlook'), 'resolved surge shows the agent text as "resolved" for a while', $nt);
     Config::save(['notice_resolved_hours' => '0']);

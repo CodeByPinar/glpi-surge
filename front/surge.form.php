@@ -10,6 +10,7 @@
  */
 
 use GlpiPlugin\Surge\Config;
+use GlpiPlugin\Surge\Events;
 use GlpiPlugin\Surge\Profile;
 use GlpiPlugin\Surge\Rule;
 use GlpiPlugin\Surge\Surge;
@@ -151,7 +152,9 @@ foreach ($items as $r) {
     }
     echo "</td></tr>";
 }
-echo "</tbody></table></div></div></div>";
+echo "</tbody></table></div></div>";
+Events::page('main', $s);
+echo "</div>";
 
 // actions
 echo "<div class='col-xl-4'>";
@@ -204,5 +207,6 @@ if ($manage && $open) {
 if ($s['users_id_ack']) {
     echo "<p class='text-muted small mt-3'>" . Ui::e(sprintf(__('Acknowledged by %1$s on %2$s', 'surge'), getUserName((int) $s['users_id_ack']), Ui::dt($s['date_ack']))) . "</p>";
 }
+Events::page('side', $s);
 echo "</div></div>";
 Ui::footer();
