@@ -32,6 +32,8 @@ final class Config
         'embed_model'      => '',
         'embed_key'        => '',        // encrypted with GLPIKey
         'embed_weight'     => '0.5',     // share of the embedding similarity in the final score
+        // 0.3.1
+        'demo_data'        => '',        // ids of the sample data (Demo), JSON; empty when not loaded
     ];
 
     /** @var array<string,string>|null */
@@ -93,6 +95,7 @@ final class Config
                 'embed_model'      => mb_substr($x, 0, 100),
                 'embed_weight'     => (string) round(max(0.0, min(1.0, (float) str_replace(',', '.', $x))), 2),
                 'embed_key'        => $x === '' ? self::get('embed_key') : (string) (new \GLPIKey())->encrypt($x),
+                'demo_data'        => is_array(json_decode($x, true)) ? $x : '',
                 default            => $x === '1' ? '1' : '0',
             };
         }

@@ -9,6 +9,7 @@
  */
 
 use GlpiPlugin\Surge\Config;
+use GlpiPlugin\Surge\Demo;
 use GlpiPlugin\Surge\Embeddings;
 use GlpiPlugin\Surge\Profile;
 use GlpiPlugin\Surge\Ui;
@@ -16,8 +17,23 @@ use GlpiPlugin\Surge\Ui;
 include('../../../inc/includes.php');
 
 Ui::need(Profile::CONFIG);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['demo'])) {
+    try {
+        if ($_POST['demo'] === 'load') {
+            $r = Demo::create();
+            Session::addMessageAfterRedirect(sprintf(__('Demo data loaded: %1$d tickets, %2$d surges. Open Surges to see them.', 'surge'), $r['tickets'], $r['surges']), false, INFO);
+        } else {
+            Demo::clean();
+            Session::addMessageAfterRedirect(__('Demo data removed.', 'surge'), false, INFO);
+        }
+    } catch (RuntimeException $e) {
+        Session::addMessageAfterRedirect($e->getMessage(), false, ERROR);
+    }
+    Html::redirect(Ui::url('config'));
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $in = $_POST;
+    unset($in['demo_data']);
     // multi-selects send nothing when emptied
     $in['notify_users'] = $_POST['notify_users'] ?? [];
     $in['notify_groups'] = $_POST['notify_groups'] ?? [];
@@ -109,4 +125,16 @@ echo "<button class='btn btn-outline-primary btn-sm mt-3' name='test_embed' valu
 echo "</div></div></div>";
 
 echo "</div><div class='mt-3'><button class='btn btn-primary'><i class='ti ti-device-floppy'></i> " . Ui::e(__('Save', 'surge')) . "</button></div></form>";
+
+// demo data (separate form)
+echo "<div class='card mt-4'><div class='card-header'><h3 class='card-title'><i class='ti ti-flask me-1'></i>" . Ui::e(__('Demo data', 'surge')) . "</h3></div><div class='card-body'>";
+echo "<form method='post' action='" . Ui::e(Ui::url('config')) . "' class='d-flex flex-wrap gap-3 align-items-center'>" . Ui::csrf();
+if (Demo::loaded()) {
+    echo "<span class='badge bg-green-lt'>" . Ui::e(__('Loaded', 'surge')) . "</span><span class='text-muted small flex-fill'>" . Ui::e(__('The sample tickets, users, categories, surges and on-call slots stay until you remove them.', 'surge')) . "</span>"
+        . "<button class='btn btn-outline-danger' name='demo' value='clean' onclick=\"return confirm(" . Ui::e(json_encode(__('Remove all demo data (tickets, users, categories, surges, on-call slots)?', 'surge'))) . ")\"><i class='ti ti-trash'></i> " . Ui::e(__('Remove demo data', 'surge')) . "</button>";
+} else {
+    echo "<span class='text-muted small flex-fill'>" . Ui::e(__('Creates two outages (mail, floor-3 network) among everyday tickets, a master ticket and a portal notice, past surges for the statistics and an on-call rota: 20 tickets, 8 users without password, 2 categories and 1 location in the current entity. Everything is removed with one click. For test and demo environments.', 'surge')) . "</span>"
+        . "<button class='btn btn-outline-primary' name='demo' value='load' onclick=\"return confirm(" . Ui::e(json_encode(__('Load the demo data into the current entity?', 'surge'))) . ")\"><i class='ti ti-flask'></i> " . Ui::e(__('Load demo data', 'surge')) . "</button>";
+}
+echo "</form></div></div>";
 Ui::footer();

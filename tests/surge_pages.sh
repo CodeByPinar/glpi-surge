@@ -55,4 +55,10 @@ o=$(php /tmp/srb.php 2>&1); rm -f /tmp/srb.php; has "$o" "surge-banner" "ticket 
 # rights: user without the right (post-only = Self-Service)
 PO=$(php $Q "select id from glpi_users where name='post-only'")
 if [ -n "$PO" ]; then o=$(req surge GET '{}' '{}' "$PO"); chk "$o" "post-only: list 403" "403"; o=$(req rules GET '{}' '{}' "$PO"); chk "$o" "post-only: rules 403" "403"; fi
+# demo data (0.3.1): card, load, remove
+o=$(req config GET '{}' '{}'); has "$o" "Load demo data\|Örnek verileri yükle" "settings: demo data card"
+o=$(req config POST '{}' '{"demo":"load"}'); chk "$o" "POST demo load"; has "$o" "Demo data loaded\|Örnek veriler yüklendi" "demo loaded message"
+o=$(req config GET '{}' '{}'); has "$o" "Remove demo data\|Örnek verileri kaldır" "settings: remove button once loaded"
+o=$(req config POST '{}' '{"demo":"clean"}'); chk "$o" "POST demo remove"
+n=$((n+1)); [ "$(php $Q "select value from glpi_configs where context='plugin:surge' and name='demo_data'")" = "" ] && echo "  ok  demo removed" || { bad=$((bad+1)); echo "SORUN demo removed"; }
 echo; echo "$n test, $bad sorun"

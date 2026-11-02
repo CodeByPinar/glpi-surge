@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.1] — 2026-11-02
+
+- **Demo data** (Settings): load two sample outages with a master ticket, a portal notice, past surges and an on-call
+  rota in one click, remove them in one click. Turkish texts for Turkish users. For test and demo environments.
+
 ## [0.3.0] — 2026-11-02
 
 - **Extension points** for other plugins: `surge_event` (detected, ticket joined, acknowledged, master, problem,

@@ -7,193 +7,233 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: front/config.php:100
-msgid "Enabled"
-msgstr "Activé"
-
-#: front/config.php:100
-msgid "Off by default."
-msgstr "Désactivé par défaut."
-
-#: front/config.php:101
-msgid "Endpoint"
-msgstr "Point d'accès"
-
 #: front/config.php:102
-msgid "Model"
-msgstr "Modèle"
-
-#: front/config.php:103
-msgid "API key"
-msgstr "Clé d'API"
-
-#: front/config.php:104
-msgid "stored — type to change"
-msgstr "enregistrée — saisir pour changer"
-
-#: front/config.php:104
-msgid "none"
-msgstr "aucun"
-
-#: front/config.php:105
-msgid "Remove the stored key"
-msgstr "Supprimer la clé enregistrée"
-
-#: front/config.php:106
-msgid "Weight"
-msgstr "Poids"
-
-#: front/config.php:107
-msgid "Weight: share of the semantic score in the final similarity (0 = words only, 1 = meaning only; 0.5 recommended)."
-msgstr "Poids : part du score sémantique dans la similarité finale (0 = mots seulement, 1 = sens seulement ; 0,5 recommandé)."
-
-#: front/config.php:108
-msgid "Save and test the connection"
-msgstr "Enregistrer et tester la connexion"
-
-#: front/config.php:111 front/oncall.php:55 front/rules.php:87
-msgid "Save"
-msgstr "Enregistrer"
-
-#: front/config.php:31
-msgid "Embedding server OK: %1$d dimensions, %2$.1f s. Similarity of two paraphrases: %3$d %%."
-msgstr "Serveur d'embeddings OK : %1$d dimensions, %2$.1f s. Similarité de deux paraphrases : %3$d %%."
-
-#: front/config.php:34
-msgid "Embedding server error: %s"
-msgstr "Erreur du serveur d'embeddings : %s"
-
-#: front/config.php:37
-msgid "Settings saved."
-msgstr "Paramètres enregistrés."
-
-#: front/config.php:42 src/Ui.php:54
-msgid "Settings"
-msgstr "Paramètres"
-
-#: front/config.php:54
-msgid "Very high"
-msgstr "Très haute"
-
-#: front/config.php:54
-msgid "High"
-msgstr "Haute"
-
-#: front/config.php:54
-msgid "Medium"
-msgstr "Moyenne"
-
-#: front/config.php:54
-msgid "Low"
-msgstr "Basse"
-
-#: front/config.php:54
-msgid "Very low"
-msgstr "Très basse"
-
-#: front/config.php:59
-msgid "Handling"
-msgstr "Traitement"
-
-#: front/config.php:60
-msgid "Master ticket urgency"
-msgstr "Urgence du ticket maître"
-
-#: front/config.php:61
-msgid "Master ticket impact"
-msgstr "Impact du ticket maître"
-
-#: front/config.php:62
-msgid "Solving the master ticket solves every linked ticket"
-msgstr "Résoudre le ticket maître résout tous les tickets liés"
-
-#: front/config.php:62
-msgid "The same solution text is added to each open ticket of the surge; GLPI notifies the requesters as usual."
-msgstr "Le même texte de solution est ajouté à chaque ticket ouvert de l'incident ; GLPI notifie les demandeurs comme d'habitude."
-
-#: front/config.php:63
-msgid "Link late tickets to the master automatically"
-msgstr "Lier automatiquement les tickets tardifs au ticket maître"
-
-#: front/config.php:63
-msgid "Tickets that join a surge after its master ticket was created become its children too."
-msgstr "Les tickets qui rejoignent l'incident après la création du ticket maître deviennent aussi ses enfants."
-
-#: front/config.php:64
-msgid "A surge keeps collecting tickets for (hours after its last ticket)"
-msgstr "Un incident continue de regrouper des tickets pendant (heures après son dernier ticket)"
-
-#: front/config.php:69
-msgid "E-mail when a surge is detected"
-msgstr "E-mail à la détection d'un incident"
-
-#: front/config.php:70
-msgid "Users"
-msgstr "Utilisateurs"
-
-#: front/config.php:72
-msgid "Groups (all members)"
-msgstr "Groupes (tous les membres)"
-
-#: front/config.php:74
-msgid "Also e-mail whoever is on call"
-msgstr "Envoyer aussi un e-mail à la personne d'astreinte"
-
-#: front/config.php:74
-msgid "See the On-call tab. E-mails go through GLPI's notification queue and mail settings."
-msgstr "Voir l'onglet Astreinte. Les e-mails passent par la file de notifications et les paramètres de messagerie de GLPI."
-
-#: front/config.php:78
-msgid "Notices for end users"
-msgstr "Annonces aux utilisateurs"
-
-#: front/config.php:79
-msgid "A notice is published from a surge page (\"Notice for end users\"). It appears at the top of the self-service portal for users of the surge's entities."
-msgstr "Une annonce se publie depuis la page d'un incident (« Annonce aux utilisateurs »). Elle s'affiche en haut du portail libre-service pour les utilisateurs des entités de l'incident."
-
-#: front/config.php:80
-msgid "Show notices to central-interface users too"
-msgstr "Afficher aussi les annonces dans l'interface standard"
-
-#: front/config.php:80
-msgid "By default only self-service users see them."
-msgstr "Par défaut, seuls les utilisateurs du libre-service les voient."
-
-#: front/config.php:81
-msgid "After resolution, keep showing the notice as \"resolved\" for (hours)"
-msgstr "Après résolution, afficher l'annonce comme « résolue » pendant (heures)"
-
-#: front/config.php:86
 msgid "Webhook"
 msgstr "Webhook"
 
-#: front/config.php:87
+#: front/config.php:103
 msgid "URL"
 msgstr "URL"
 
-#: front/config.php:88
+#: front/config.php:104
 msgid "Format"
 msgstr "Format"
 
-#: front/config.php:88
+#: front/config.php:104
 msgid "Generic JSON"
 msgstr "JSON générique"
 
-#: front/config.php:89
+#: front/config.php:105
 msgid "Sent when a surge is detected, gets a master ticket and is resolved. GLPI proxy settings are used. Leave empty to disable."
 msgstr "Envoyé quand un incident est détecté, reçoit un ticket maître et est résolu. Les paramètres de proxy de GLPI sont utilisés. Laisser vide pour désactiver."
 
-#: front/config.php:90
+#: front/config.php:106
 msgid "Example payload"
 msgstr "Exemple de contenu"
 
-#: front/config.php:98
+#: front/config.php:114
 msgid "Semantic similarity (optional)"
 msgstr "Similarité sémantique (facultatif)"
 
-#: front/config.php:99
+#: front/config.php:115
 msgid "Adds meaning-based matching on top of word matching, so \"cannot log in to the VPN\" and \"remote access authentication failed\" can end up together. Needs an OpenAI-compatible /v1/embeddings endpoint that you run yourself (Ollama, llama.cpp with --embeddings, LocalAI…). Ticket titles and the beginning of descriptions are sent to it; if it is unreachable, detection falls back to word matching."
 msgstr "Ajoute une correspondance par le sens en plus des mots : « impossible de se connecter au VPN » et « échec d'authentification de l'accès distant » peuvent être regroupés. Nécessite un point d'accès /v1/embeddings compatible OpenAI que vous hébergez vous-même (Ollama, llama.cpp avec --embeddings, LocalAI…). Les titres et le début des descriptions lui sont envoyés ; s'il est injoignable, la détection se fait par les mots."
+
+#: front/config.php:116
+msgid "Enabled"
+msgstr "Activé"
+
+#: front/config.php:116
+msgid "Off by default."
+msgstr "Désactivé par défaut."
+
+#: front/config.php:117
+msgid "Endpoint"
+msgstr "Point d'accès"
+
+#: front/config.php:118
+msgid "Model"
+msgstr "Modèle"
+
+#: front/config.php:119
+msgid "API key"
+msgstr "Clé d'API"
+
+#: front/config.php:120
+msgid "stored — type to change"
+msgstr "enregistrée — saisir pour changer"
+
+#: front/config.php:120
+msgid "none"
+msgstr "aucun"
+
+#: front/config.php:121
+msgid "Remove the stored key"
+msgstr "Supprimer la clé enregistrée"
+
+#: front/config.php:122
+msgid "Weight"
+msgstr "Poids"
+
+#: front/config.php:123
+msgid "Weight: share of the semantic score in the final similarity (0 = words only, 1 = meaning only; 0.5 recommended)."
+msgstr "Poids : part du score sémantique dans la similarité finale (0 = mots seulement, 1 = sens seulement ; 0,5 recommandé)."
+
+#: front/config.php:124
+msgid "Save and test the connection"
+msgstr "Enregistrer et tester la connexion"
+
+#: front/config.php:127 front/oncall.php:55 front/rules.php:87
+msgid "Save"
+msgstr "Enregistrer"
+
+#: front/config.php:130
+msgid "Demo data"
+msgstr ""
+
+#: front/config.php:133
+msgid "Loaded"
+msgstr ""
+
+#: front/config.php:133
+msgid "The sample tickets, users, categories, surges and on-call slots stay until you remove them."
+msgstr ""
+
+#: front/config.php:134
+msgid "Remove all demo data (tickets, users, categories, surges, on-call slots)?"
+msgstr ""
+
+#: front/config.php:134
+msgid "Remove demo data"
+msgstr ""
+
+#: front/config.php:136
+msgid "Creates two outages (mail, floor-3 network) among everyday tickets, a master ticket and a portal notice, past surges for the statistics and an on-call rota: 20 tickets, 8 users without password, 2 categories and 1 location in the current entity. Everything is removed with one click. For test and demo environments."
+msgstr ""
+
+#: front/config.php:137
+msgid "Load the demo data into the current entity?"
+msgstr ""
+
+#: front/config.php:137
+msgid "Load demo data"
+msgstr ""
+
+#: front/config.php:24
+msgid "Demo data loaded: %1$d tickets, %2$d surges. Open Surges to see them."
+msgstr ""
+
+#: front/config.php:27
+msgid "Demo data removed."
+msgstr ""
+
+#: front/config.php:47
+msgid "Embedding server OK: %1$d dimensions, %2$.1f s. Similarity of two paraphrases: %3$d %%."
+msgstr "Serveur d'embeddings OK : %1$d dimensions, %2$.1f s. Similarité de deux paraphrases : %3$d %%."
+
+#: front/config.php:50
+msgid "Embedding server error: %s"
+msgstr "Erreur du serveur d'embeddings : %s"
+
+#: front/config.php:53
+msgid "Settings saved."
+msgstr "Paramètres enregistrés."
+
+#: front/config.php:58 src/Ui.php:54
+msgid "Settings"
+msgstr "Paramètres"
+
+#: front/config.php:70
+msgid "Very high"
+msgstr "Très haute"
+
+#: front/config.php:70
+msgid "High"
+msgstr "Haute"
+
+#: front/config.php:70
+msgid "Medium"
+msgstr "Moyenne"
+
+#: front/config.php:70
+msgid "Low"
+msgstr "Basse"
+
+#: front/config.php:70
+msgid "Very low"
+msgstr "Très basse"
+
+#: front/config.php:75
+msgid "Handling"
+msgstr "Traitement"
+
+#: front/config.php:76
+msgid "Master ticket urgency"
+msgstr "Urgence du ticket maître"
+
+#: front/config.php:77
+msgid "Master ticket impact"
+msgstr "Impact du ticket maître"
+
+#: front/config.php:78
+msgid "Solving the master ticket solves every linked ticket"
+msgstr "Résoudre le ticket maître résout tous les tickets liés"
+
+#: front/config.php:78
+msgid "The same solution text is added to each open ticket of the surge; GLPI notifies the requesters as usual."
+msgstr "Le même texte de solution est ajouté à chaque ticket ouvert de l'incident ; GLPI notifie les demandeurs comme d'habitude."
+
+#: front/config.php:79
+msgid "Link late tickets to the master automatically"
+msgstr "Lier automatiquement les tickets tardifs au ticket maître"
+
+#: front/config.php:79
+msgid "Tickets that join a surge after its master ticket was created become its children too."
+msgstr "Les tickets qui rejoignent l'incident après la création du ticket maître deviennent aussi ses enfants."
+
+#: front/config.php:80
+msgid "A surge keeps collecting tickets for (hours after its last ticket)"
+msgstr "Un incident continue de regrouper des tickets pendant (heures après son dernier ticket)"
+
+#: front/config.php:85
+msgid "E-mail when a surge is detected"
+msgstr "E-mail à la détection d'un incident"
+
+#: front/config.php:86
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: front/config.php:88
+msgid "Groups (all members)"
+msgstr "Groupes (tous les membres)"
+
+#: front/config.php:90
+msgid "Also e-mail whoever is on call"
+msgstr "Envoyer aussi un e-mail à la personne d'astreinte"
+
+#: front/config.php:90
+msgid "See the On-call tab. E-mails go through GLPI's notification queue and mail settings."
+msgstr "Voir l'onglet Astreinte. Les e-mails passent par la file de notifications et les paramètres de messagerie de GLPI."
+
+#: front/config.php:94
+msgid "Notices for end users"
+msgstr "Annonces aux utilisateurs"
+
+#: front/config.php:95
+msgid "A notice is published from a surge page (\"Notice for end users\"). It appears at the top of the self-service portal for users of the surge's entities."
+msgstr "Une annonce se publie depuis la page d'un incident (« Annonce aux utilisateurs »). Elle s'affiche en haut du portail libre-service pour les utilisateurs des entités de l'incident."
+
+#: front/config.php:96
+msgid "Show notices to central-interface users too"
+msgstr "Afficher aussi les annonces dans l'interface standard"
+
+#: front/config.php:96
+msgid "By default only self-service users see them."
+msgstr "Par défaut, seuls les utilisateurs du libre-service les voient."
+
+#: front/config.php:97
+msgid "After resolution, keep showing the notice as \"resolved\" for (hours)"
+msgstr "Après résolution, afficher l'annonce comme « résolue » pendant (heures)"
 
 #: front/oncall.php:26
 msgid "On-call rota saved."
@@ -407,7 +447,7 @@ msgstr "%d jours"
 msgid "< 1 min"
 msgstr "< 1 min"
 
-#: front/stats.php:30 front/stats.php:31 front/surge.form.php:114
+#: front/stats.php:30 front/stats.php:31 front/surge.form.php:115
 msgid "%d min"
 msgstr "%d min"
 
@@ -479,195 +519,195 @@ msgstr "%1$d incident(s) · %2$d tickets"
 msgid "Top locations"
 msgstr "Lieux principaux"
 
-#: front/surge.form.php:101
+#: front/surge.form.php:102
 msgid "Not a real incident? The tickets stay as they are."
 msgstr "Pas un vrai incident ? Les tickets restent inchangés."
 
-#: front/surge.form.php:101
+#: front/surge.form.php:102
 msgid "Dismiss"
 msgstr "Ignorer"
 
-#: front/surge.form.php:102
+#: front/surge.form.php:103
 msgid "Reopen"
 msgstr "Rouvrir"
 
-#: front/surge.form.php:113 front/surge.form.php:138 front/surge.php:70
+#: front/surge.form.php:114 front/surge.form.php:139 front/surge.php:70
 msgid "Tickets"
 msgstr "Tickets"
 
-#: front/surge.form.php:114
+#: front/surge.form.php:115
 msgid "Time span"
 msgstr "Durée"
 
-#: front/surge.form.php:115 front/surge.php:71
+#: front/surge.form.php:116 front/surge.php:71
 msgid "Category / location"
 msgstr "Catégorie / lieu"
 
-#: front/surge.form.php:116
+#: front/surge.form.php:117
 msgid "Detected by"
 msgstr "Détecté par"
 
-#: front/surge.form.php:121 front/surge.php:71
+#: front/surge.form.php:122 front/surge.php:71
 msgid "Arrivals"
 msgstr "Arrivées"
 
-#: front/surge.form.php:124
+#: front/surge.form.php:125
 msgid "Common words"
 msgstr "Mots communs"
 
-#: front/surge.form.php:139
+#: front/surge.form.php:140
 msgid "Ticket"
 msgstr "Ticket"
 
-#: front/surge.form.php:139
+#: front/surge.form.php:140
 msgid "Requester"
 msgstr "Demandeur"
 
-#: front/surge.form.php:139
+#: front/surge.form.php:140
 msgid "Opened"
 msgstr "Ouvert le"
 
-#: front/surge.form.php:139 front/surge.php:70
+#: front/surge.form.php:140 front/surge.php:70
 msgid "Status"
 msgstr "Statut"
 
-#: front/surge.form.php:140
+#: front/surge.form.php:141
 msgid "Text similarity to the surge"
 msgstr "Similarité du texte avec l'incident"
 
-#: front/surge.form.php:140
+#: front/surge.form.php:141
 msgid "Match"
 msgstr "Correspondance"
 
-#: front/surge.form.php:150
+#: front/surge.form.php:151
 msgid "Not part of this incident"
 msgstr "Ne fait pas partie de cet incident"
 
-#: front/surge.form.php:158
+#: front/surge.form.php:161
 msgid "Major incident"
 msgstr "Incident majeur"
 
-#: front/surge.form.php:160
+#: front/surge.form.php:163
 msgid "Master ticket"
 msgstr "Ticket maître"
 
-#: front/surge.form.php:162
+#: front/surge.form.php:165
 msgid "Master ticket title"
 msgstr "Titre du ticket maître"
 
-#: front/surge.form.php:162 src/Surge.php:331
+#: front/surge.form.php:165 src/Surge.php:332
 msgid "[Major incident] %s"
 msgstr "[Incident majeur] %s"
 
-#: front/surge.form.php:163
+#: front/surge.form.php:166
 msgid "Create master ticket and link all"
 msgstr "Créer le ticket maître et tout lier"
 
-#: front/surge.form.php:164
+#: front/surge.form.php:167
 msgid "Every ticket of the surge becomes a child of the master. New tickets joining the surge are linked automatically."
 msgstr "Chaque ticket de l'incident devient enfant du ticket maître. Les nouveaux tickets sont liés automatiquement."
 
-#: front/surge.form.php:169
+#: front/surge.form.php:172
 msgid "Create a problem and link all"
 msgstr "Créer un problème et tout lier"
 
-#: front/surge.form.php:178
+#: front/surge.form.php:181
 msgid "Notice for end users"
 msgstr "Annonce aux utilisateurs"
 
-#: front/surge.form.php:179
+#: front/surge.form.php:182
 msgid "Published"
 msgstr "Publiée"
 
-#: front/surge.form.php:180
+#: front/surge.form.php:183
 msgid "Shown at the top of the self-service portal for users of the same entities, so they do not open the same ticket again. Ticket details are never shown."
 msgstr "Affichée en haut du portail libre-service pour les utilisateurs des mêmes entités, afin qu'ils ne rouvrent pas le même ticket. Le détail des tickets n'est jamais affiché."
 
-#: front/surge.form.php:183
+#: front/surge.form.php:186
 msgid "Update notice"
 msgstr "Mettre à jour l'annonce"
 
-#: front/surge.form.php:183
+#: front/surge.form.php:186
 msgid "Publish notice"
 msgstr "Publier l'annonce"
 
-#: front/surge.form.php:186
+#: front/surge.form.php:189
 msgid "Withdraw notice"
 msgstr "Retirer l'annonce"
 
-#: front/surge.form.php:188
+#: front/surge.form.php:191
 msgid "Shown as \"resolved\" for %d hour(s) after resolution."
 msgstr "Affichée comme « résolue » pendant %d heure(s) après la résolution."
 
-#: front/surge.form.php:194
+#: front/surge.form.php:197
 msgid "Tell everyone"
 msgstr "Informer tout le monde"
 
-#: front/surge.form.php:195
+#: front/surge.form.php:198
 msgid "e.g. We are aware of the mail outage and working on it. Next update at 10:30."
 msgstr "ex. Nous avons connaissance de la panne de messagerie et y travaillons. Prochaine information à 10h30."
 
-#: front/surge.form.php:196
+#: front/surge.form.php:199
 msgid "Add as public follow-up to all open tickets"
 msgstr "Ajouter en suivi public à tous les tickets ouverts"
 
-#: front/surge.form.php:198
+#: front/surge.form.php:201
 msgid "Resolve"
 msgstr "Résoudre"
 
-#: front/surge.form.php:199
+#: front/surge.form.php:202
 msgid "e.g. The mail server was restarted at 10:12; mail works again."
 msgstr "ex. Le serveur de messagerie a été redémarré à 10h12 ; la messagerie fonctionne de nouveau."
 
-#: front/surge.form.php:200
+#: front/surge.form.php:203
 msgid "Solve every open ticket of this surge with this solution?"
 msgstr "Résoudre tous les tickets ouverts de cet incident avec cette solution ?"
 
-#: front/surge.form.php:200
+#: front/surge.form.php:203
 msgid "Solve all tickets"
 msgstr "Résoudre tous les tickets"
 
-#: front/surge.form.php:201
+#: front/surge.form.php:204
 msgid "Solving the master ticket in GLPI does the same automatically."
 msgstr "Résoudre le ticket maître dans GLPI fait la même chose automatiquement."
 
-#: front/surge.form.php:205
+#: front/surge.form.php:208
 msgid "Acknowledged by %1$s on %2$s"
 msgstr "Pris en charge par %1$s le %2$s"
 
-#: front/surge.form.php:39
+#: front/surge.form.php:40
 msgid "Master ticket #%d created and linked."
 msgstr "Ticket maître #%d créé et lié."
 
-#: front/surge.form.php:43
+#: front/surge.form.php:44
 msgid "Problem %d created and linked."
 msgstr "Problème %d créé et lié."
 
-#: front/surge.form.php:47
+#: front/surge.form.php:48
 msgid "Write the message first."
 msgstr "Écrivez d'abord le message."
 
-#: front/surge.form.php:50
+#: front/surge.form.php:51
 msgid "Follow-up added to %d ticket(s)."
 msgstr "Suivi ajouté à %d ticket(s)."
 
-#: front/surge.form.php:50 front/surge.form.php:57
+#: front/surge.form.php:51 front/surge.form.php:58
 msgid "%d ticket(s) skipped (no right)."
 msgstr "%d ticket(s) ignoré(s) (pas de droit)."
 
-#: front/surge.form.php:54
+#: front/surge.form.php:55
 msgid "Write the solution first."
 msgstr "Écrivez d'abord la solution."
 
-#: front/surge.form.php:57
+#: front/surge.form.php:58
 msgid "%d ticket(s) solved."
 msgstr "%d ticket(s) résolu(s)."
 
-#: front/surge.form.php:61
+#: front/surge.form.php:62
 msgid "Notice published on the self-service portal."
 msgstr "Annonce publiée sur le portail libre-service."
 
-#: front/surge.form.php:98
+#: front/surge.form.php:99
 msgid "Acknowledge"
 msgstr "Prendre en charge"
 
@@ -719,6 +759,10 @@ msgstr "Même catégorie, texte similaire"
 msgid "Default rule: 5 or more open tickets in 30 minutes, same category, similar title or description."
 msgstr "Règle par défaut : 5 tickets ouverts ou plus en 30 minutes, même catégorie, titre ou description similaire."
 
+#: src/Demo.php:116
+msgid "Demo data is already loaded."
+msgstr ""
+
 #: src/Mailer.php:64
 msgid "[Surge] %1$s — %2$d similar tickets"
 msgstr "[Surge] %1$s — %2$d tickets similaires"
@@ -735,7 +779,7 @@ msgstr "Catégorie"
 msgid "Location"
 msgstr "Lieu"
 
-#: src/Mailer.php:82 src/TicketHooks.php:88
+#: src/Mailer.php:82 src/TicketHooks.php:89
 msgid "Open surge"
 msgstr "Ouvrir l'incident"
 
@@ -831,45 +875,45 @@ msgstr "demandes uniquement"
 msgid "Unnamed rule"
 msgstr "Règle sans nom"
 
-#: src/Surge.php:319 src/Surge.php:366
+#: src/Surge.php:320 src/Surge.php:368
 msgid "Surge not found."
 msgstr "Incident introuvable."
 
-#: src/Surge.php:325
+#: src/Surge.php:326
 msgid "You are not allowed to create tickets."
 msgstr "Vous n'êtes pas autorisé à créer des tickets."
 
-#: src/Surge.php:333
+#: src/Surge.php:334
 msgid "Major incident opened by Surge from %1$d similar tickets received between %2$s and %3$s."
 msgstr "Incident majeur ouvert par Surge à partir de %1$d tickets similaires reçus entre %2$s et %3$s."
 
-#: src/Surge.php:350
+#: src/Surge.php:351
 msgid "The master ticket could not be created."
 msgstr "Le ticket maître n'a pas pu être créé."
 
-#: src/Surge.php:372
+#: src/Surge.php:374
 msgid "You are not allowed to create problems."
 msgstr "Vous n'êtes pas autorisé à créer des problèmes."
 
-#: src/Surge.php:377
+#: src/Surge.php:379
 msgid "Problem opened by Surge from %d similar tickets."
 msgstr "Problème ouvert par Surge à partir de %d tickets similaires."
 
-#: src/Surge.php:384
+#: src/Surge.php:386
 msgid "The problem could not be created."
 msgstr "Le problème n'a pas pu être créé."
 
-#: src/Surge.php:470
+#: src/Surge.php:479
 msgid "We are aware of an issue: %s. Our team is working on it — there is no need to open a new ticket. We will post an update here."
 msgstr "Nous avons connaissance d'un problème : %s. Notre équipe y travaille — inutile d'ouvrir un nouveau ticket. Nous publierons les nouvelles ici."
-
-#: src/Surge.php:477
-msgid "Write the notice first."
-msgstr "Écrivez d'abord l'annonce."
 
 #: src/Surge.php:48
 msgid "New"
 msgstr "Nouveau"
+
+#: src/Surge.php:486
+msgid "Write the notice first."
+msgstr "Écrivez d'abord l'annonce."
 
 #: src/Surge.php:49
 msgid "In progress"
@@ -879,7 +923,7 @@ msgstr "En cours"
 msgid "Resolved"
 msgstr "Résolu"
 
-#: src/Surge.php:506
+#: src/Surge.php:517
 msgid "Resolved: %s"
 msgstr "Résolu : %s"
 
@@ -891,22 +935,22 @@ msgstr "Détecter les afflux de tickets similaires (incidents majeurs)"
 msgid "%d new surge(s)"
 msgstr "%d nouvel(s) incident(s)"
 
-#: src/TicketHooks.php:82
+#: src/TicketHooks.php:83
 msgid "Master ticket of surge #%1$d — %2$d linked tickets."
 msgstr "Ticket maître de l'incident #%1$d — %2$d tickets liés."
 
-#: src/TicketHooks.php:83
+#: src/TicketHooks.php:84
 msgid "Part of surge #%1$d — %2$d similar tickets in %3$d min."
 msgstr "Fait partie de l'incident #%1$d — %2$d tickets similaires en %3$d min."
 
-#: src/TicketHooks.php:85
+#: src/TicketHooks.php:86
 msgid "Master ticket: #%d."
 msgstr "Ticket maître : #%d."
 
-#: src/Ui.php:57
+#: src/Ui.php:58
 msgid "Bursts of similar tickets, handled as one major incident"
 msgstr "Des afflux de tickets similaires, traités comme un seul incident majeur"
 
-#: src/Ui.php:92
+#: src/Ui.php:94
 msgid "Ticket arrivals"
 msgstr "Arrivées de tickets"

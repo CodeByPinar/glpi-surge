@@ -524,11 +524,11 @@ tests/                   integration tests and demo data for a GLPI test instanc
 - **Tests.** `tests/surge_test.php` has 27 checks: text processing, detection, every action and the cascade.
   `tests/surge_v2_test.php` has 36: languages, on-call slots, e-mail queue, notices, statistics, semantic matching
   (with `tests/embed_mock.py`).
-  `tests/surge_v3_test.php` has 14: the extension points.
-  `tests/surge_pages.sh` has 42: every page, every POST action and the rights. Both pass on GLPI 11 and 12. They expect
+  `tests/surge_v3_test.php` has 14: the extension points. `tests/surge_demo_test.php` has 32: demo data load / remove.
+  `tests/surge_pages.sh` has 48: every page, every POST action and the rights. Both pass on GLPI 11 and 12. They expect
   a disposable GLPI instance with a small CLI boot helper. **Never run them on production.**
-- **Demo data.** `php tests/demo.php <instance> create` (and `clean`) builds the scenario used in the screenshots on a
-  test instance.
+- **Demo data.** *Settings → Demo data* loads (and removes) the scenario used in the screenshots in one click.
+  `php tests/demo.php <instance> create|clean` does the same from the command line on a test instance.
 - **Translations.** `python tools/i18n.py` extracts strings to `locales/surge.pot`, merges translations from
   `tools/<lang>.json` and compiles the `.mo` files. No gettext tools are needed.
 - **Release.** Bump `PLUGIN_SURGE_VERSION` and the changelog, run `python tools/readme_assets.py` (header badges), then push

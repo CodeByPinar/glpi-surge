@@ -70,7 +70,7 @@ final class Rule
             'match_category' => empty($in['match_category']) ? 0 : 1,
             'match_location' => empty($in['match_location']) ? 0 : 1,
             'match_title'    => empty($in['match_title']) ? 0 : 1,
-            'ticket_type'    => in_array((int) ($in['ticket_type'] ?? 0), [0, 1, 2], true) ? (int) $in['ticket_type'] : 0,
+            'ticket_type'    => in_array((int) ($in['ticket_type'] ?? 0), [0, 1, 2], true) ? (int) ($in['ticket_type'] ?? 0) : 0,
             'categories'     => json_encode(array_values(array_filter(array_map('intval', (array) ($in['categories'] ?? []))))),
             'comment'        => mb_substr(trim((string) ($in['comment'] ?? '')), 0, 2000),
         ];
