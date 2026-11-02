@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.2.0] — 2026-11-02
+
+Everything from the 0.1 roadmap.
+
+- **Notices for end users**: publish a short agent-written text from a surge page. It is shown at the top of the
+  self-service portal for users of the surge's entities, can be dismissed for the session, and turns into *"Resolved"*
+  for a configurable time. Ticket details are never exposed. Optional display for central-interface users too.
+- **Statistics** page: surges, tickets absorbed, median time to detect / resolve, handled-as-incident and dismissed
+  rates, surges per week, top categories and locations (30 / 90 / 180 / 365 days).
+- **On-call rota** (days, hours, overnight slots) and **e-mail on detection** to fixed users / groups and to whoever
+  is on call, through GLPI's notification queue.
+- **Semantic similarity** (optional, off by default): OpenAI-compatible `/v1/embeddings` endpoint you host (Ollama,
+  llama.cpp, LocalAI…), cached vectors, blended with TF-IDF by a configurable weight. Falls back to TF-IDF when
+  the endpoint is down. The API key is stored encrypted.
+- **Languages**: French, German, Spanish and Portuguese (Brazil) user interface; stop words and diacritic folding for
+  French, German, Spanish, Portuguese and Italian (plus English and Turkish).
+- `plugin.xml` descriptor and logo for the GLPI plugin catalogue.
+- Settings: unticked boxes are saved reliably; secrets are never shown back.
+
 ## [0.1.0] — 2026-11-02
 
 First release.

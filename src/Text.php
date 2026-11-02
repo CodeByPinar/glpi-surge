@@ -34,6 +34,22 @@ final class Text
         'merhaba', 'iyi', 'gunler', 'tesekkurler', 'tesekkur', 'ederim', 'lutfen', 'rica', 'sayin', 'hanim', 'bey', 'konu',
         'sorun', 'problem', 'hata', 'talep', 'kayit', 'yardim', 'acil', 'bugun', 'simdi', 'hala', 'tekrar', 'yine', 'ben',
         'benim', 'bizim', 'biz', 'siz', 'sizin', 'olarak', 'oldu', 'olur', 'var', 'icinde', 'kadar', 'sonra', 'once', 'neden',
+        // French (folded)
+        'les', 'des', 'une', 'est', 'pas', 'pour', 'que', 'qui', 'dans', 'sur', 'avec', 'par', 'plus', 'mais', 'sont', 'ont',
+        'aux', 'ces', 'cette', 'mon', 'mes', 'nous', 'vous', 'elle', 'ils', 'leur', 'bonjour', 'merci', 'cordialement', 'svp',
+        'probleme', 'erreur', 'demande', 'depuis', 'toujours', 'encore', 'aussi', 'tres', 'fait', 'faire', 'peut', 'aide',
+        // German (folded)
+        'der', 'die', 'das', 'und', 'ist', 'nicht', 'ein', 'eine', 'einen', 'mit', 'von', 'fur', 'auf', 'bei', 'sich', 'ich',
+        'wir', 'sie', 'ihr', 'den', 'dem', 'zum', 'zur', 'auch', 'noch', 'nur', 'bitte', 'danke', 'hallo', 'gruss', 'grusse',
+        'fehler', 'seit', 'kann', 'geht', 'hilfe', 'anfrage',
+        // Spanish (folded)
+        'los', 'las', 'unos', 'del', 'para', 'con', 'como', 'pero', 'esta', 'este', 'estos', 'esa', 'ese', 'hola', 'gracias',
+        'favor', 'problema', 'desde', 'todavia', 'tambien', 'muy', 'hace', 'puede', 'ayuda', 'solicitud',
+        // Portuguese (folded)
+        'uma', 'uns', 'dos', 'com', 'mas', 'isso', 'ola', 'obrigado', 'obrigada', 'erro', 'ainda', 'muito', 'pode', 'nao',
+        'pedido',
+        // Italian (folded)
+        'gli', 'uno', 'della', 'per', 'che', 'non', 'sono', 'ciao', 'grazie', 'errore', 'ancora', 'anche', 'molto', 'aiuto',
     ];
 
     private const FOLD = [
@@ -42,6 +58,8 @@ final class Text
         'é' => 'e', 'è' => 'e', 'ê' => 'e', 'ë' => 'e', 'á' => 'a', 'à' => 'a', 'ä' => 'a', 'ã' => 'a', 'å' => 'a',
         'í' => 'i', 'ì' => 'i', 'ï' => 'i', 'ó' => 'o', 'ò' => 'o', 'õ' => 'o', 'ø' => 'o', 'ú' => 'u', 'ù' => 'u',
         'ñ' => 'n', 'ß' => 'ss', 'É' => 'e', 'Á' => 'a', 'Ó' => 'o', 'Ú' => 'u', 'Ñ' => 'n',
+        'ô' => 'o', 'ò' => 'o', 'œ' => 'oe', 'æ' => 'ae', 'ÿ' => 'y', 'ý' => 'y', 'č' => 'c', 'š' => 's', 'ž' => 'z', 'ł' => 'l',
+        'ś' => 's', 'ź' => 'z', 'ż' => 'z', 'ń' => 'n', 'ą' => 'a', 'ę' => 'e', 'ő' => 'o', 'ű' => 'u', 'ř' => 'r', 'ě' => 'e',
     ];
 
     /** @var array<string,true>|null */
@@ -50,8 +68,8 @@ final class Text
     public static function normalize(string $s): string
     {
         $s = html_entity_decode(strip_tags(str_replace(['<br', '</p>', '</li>', '</div>'], [' <br', ' </p>', ' </li>', ' </div>'], $s)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-        $s = strtr($s, self::FOLD);
-        return mb_strtolower($s, 'UTF-8');
+        $s = strtr($s, self::FOLD); // first: Turkish İ / I must be folded before lower-casing
+        return strtr(mb_strtolower($s, 'UTF-8'), self::FOLD); // then: lower-cased accents of other languages (É → é → e)
     }
 
     /** Stemmed tokens of a text. @return list<string> */
@@ -190,9 +208,10 @@ final class Text
 
     /**
      * Single-linkage clustering: two documents are in the same group when a chain of pairs with similarity ≥ $min
-     * connects them (union-find). @param array<int,array<string,float>> $vecs @return list<list<int>>
+     * connects them (union-find). $sim(idA, idB) overrides the similarity (hybrid TF-IDF + embeddings).
+     * @param array<int,array<string,float>> $vecs @return list<list<int>>
      */
-    public static function cluster(array $vecs, float $min): array
+    public static function cluster(array $vecs, float $min, ?callable $sim = null): array
     {
         $ids = array_keys($vecs);
         $parent = array_combine($ids, $ids);
@@ -206,7 +225,8 @@ final class Text
         $n = count($ids);
         for ($i = 0; $i < $n; $i++) {
             for ($j = $i + 1; $j < $n; $j++) {
-                if (self::cosine($vecs[$ids[$i]], $vecs[$ids[$j]]) >= $min) {
+                $s = $sim ? $sim($ids[$i], $ids[$j]) : self::cosine($vecs[$ids[$i]], $vecs[$ids[$j]]);
+                if ($s >= $min) {
                     $parent[$find($ids[$i])] = $find($ids[$j]);
                 }
             }

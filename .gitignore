@@ -3,3 +3,5 @@ dist/
 .idea/
 .vscode/
 tests/surge_demo_ids.json
+docs/surge-chrome-ud/
+*-chrome-ud/

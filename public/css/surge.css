@@ -17,3 +17,20 @@
 .surge-banner > .ti { font-size: 1.3rem; color: #e8590c; margin-top: 1px; }
 .surge-banner.surge-resolved, .surge-banner.surge-dismissed { border-color: var(--tblr-border-color, #e3e7ee); background: var(--tblr-bg-surface-secondary, #f6f8fb); }
 .surge-banner.surge-resolved > .ti, .surge-banner.surge-dismissed > .ti { color: var(--tblr-secondary, #6b7280); }
+
+/* public notices (self-service portal) */
+.surge-notices { display: flex; flex-direction: column; gap: .5rem; margin: 0 0 1rem; }
+.surge-notice { display: flex; gap: .75rem; align-items: flex-start; padding: .8rem 1rem; border-radius: 10px; font-size: .95rem; line-height: 1.45;
+    border: 1px solid color-mix(in srgb, #e8590c 40%, transparent); background: color-mix(in srgb, #e8590c 10%, var(--tblr-bg-surface, #fff)); }
+.surge-notice > .ti { font-size: 1.4rem; color: #e8590c; margin-top: 1px; }
+.surge-notice-text { flex: 1; white-space: pre-line; }
+.surge-notice-ok { border-color: color-mix(in srgb, #2fb344 40%, transparent); background: color-mix(in srgb, #2fb344 10%, var(--tblr-bg-surface, #fff)); }
+.surge-notice-ok > .ti { color: #2fb344; }
+.surge-notice-close { border: 0; background: transparent; color: inherit; opacity: .6; padding: 0 .25rem; cursor: pointer; }
+.surge-notice-close:hover { opacity: 1; }
+
+/* statistics */
+.surge-bars { display: flex; align-items: flex-end; gap: 4px; height: 120px; }
+.surge-bars > div { flex: 1; background: linear-gradient(#ffb347, #e8590c); border-radius: 4px 4px 0 0; min-height: 2px; position: relative; }
+.surge-bars > div.zero { background: var(--tblr-border-color, #e3e7ee); }
+.surge-hbar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ffb347, #e8590c); }

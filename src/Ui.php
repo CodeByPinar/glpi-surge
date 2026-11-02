@@ -47,9 +47,10 @@ final class Ui
     public static function header(string $active, string $title): void
     {
         Html::header('Surge — ' . $title, $_SERVER['PHP_SELF'] ?? '', 'helpdesk', Menu::class);
-        $tabs = ['surge' => [__('Surges', 'surge'), 'ti ti-bolt']];
+        $tabs = ['surge' => [__('Surges', 'surge'), 'ti ti-bolt'], 'stats' => [__('Statistics', 'surge'), 'ti ti-chart-bar']];
         if (Profile::has(Profile::CONFIG)) {
             $tabs['rules'] = [__('Detection rules', 'surge'), 'ti ti-filter'];
+            $tabs['oncall'] = [__('On-call', 'surge'), 'ti ti-phone-call'];
             $tabs['config'] = [__('Settings', 'surge'), 'ti ti-adjustments'];
         }
         echo "<div class='surge container-fluid px-0'><div class='surge-head'><h2><i class='ti ti-bolt'></i> Surge</h2>"

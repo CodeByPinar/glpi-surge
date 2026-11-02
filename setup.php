@@ -21,7 +21,7 @@ use GlpiPlugin\Surge\Menu;
 use GlpiPlugin\Surge\Profile;
 use GlpiPlugin\Surge\TicketHooks;
 
-define('PLUGIN_SURGE_VERSION', '0.1.0');
+define('PLUGIN_SURGE_VERSION', '0.2.0');
 define('PLUGIN_SURGE_MIN_GLPI', '11.0.0');
 define('PLUGIN_SURGE_MAX_GLPI', '12.99.99');
 
@@ -53,6 +53,17 @@ function plugin_init_surge(): void
         $PLUGIN_HOOKS[Hooks::CONFIG_PAGE]['surge'] = 'front/config.php';
     }
     $PLUGIN_HOOKS[Hooks::ADD_CSS]['surge'] = 'css/surge.css';
+
+    // public notices ("We are aware of the mail outage…") on the self-service portal (and optionally for everyone)
+    if (Session::getLoginUserID() !== false) {
+        try {
+            if (Session::getCurrentInterface() === 'helpdesk' || \GlpiPlugin\Surge\Config::get('notice_central') === '1') {
+                $PLUGIN_HOOKS[Hooks::ADD_JAVASCRIPT]['surge'] = 'js/notice.js';
+            }
+        } catch (\Throwable $e) {
+            // settings not readable yet (install / upgrade in progress)
+        }
+    }
 }
 
 function plugin_version_surge(): array

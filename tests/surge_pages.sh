@@ -30,6 +30,18 @@ n=$((n+1)); [ "$(php $Q "select concat(value) from glpi_configs where context='p
 php $Q "update glpi_configs set value='4' where context='plugin:surge' and name in ('master_urgency','master_impact')" >/dev/null
 php $Q "update glpi_configs set value='24' where context='plugin:surge' and name='active_hours'" >/dev/null
 php $Q "update glpi_configs set value='generic' where context='plugin:surge' and name='webhook_format'" >/dev/null
+# 0.2.0 pages: statistics, on-call, notice
+for spec in "stats|{}" "stats|{\"days\":\"365\"}" "oncall|{}"; do p=${spec%%|*}; g=${spec#*|}; o=$(req $p GET "$g" '{}'); chk "$o" "GET $p $g"; done
+o=$(req stats GET '{}' '{}'); has "$o" "surge-bars" "stats: weekly bars"
+o=$(req oncall POST '{}' '{"id":"0","users_id":"4","days":["1","2"],"time_start":"18:00","time_end":"08:00","is_active":"1","comment":"SP"}'); chk "$o" "POST on-call slot"
+OC=$(php $Q "select id from glpi_plugin_surge_oncall where comment='SP'"); n=$((n+1)); [ -n "$OC" ] && echo "  ok  on-call slot saved" || { bad=$((bad+1)); echo "SORUN on-call slot"; }
+o=$(req oncall POST '{}' "{\"id\":\"$OC\",\"delete\":\"1\"}"); chk "$o" "POST on-call delete"
+o=$(req surge.form POST '{}' "{\"id\":\"$SID\",\"do\":\"publish\",\"text\":\"SP notice text\"}"); chk "$o" "POST publish notice"
+o=$(req notice GET '{}' '{}'); has "$o" "SP notice text" "notice.php returns the published notice"
+o=$(req surge.form POST '{}' "{\"id\":\"$SID\",\"do\":\"unpublish\"}"); chk "$o" "POST withdraw notice"
+o=$(req config POST '{}' '{"notify_oncall":"0","notice_central":"0","embed_enabled":"0","embed_url":"","embed_model":"","embed_key":"","embed_weight":"0.5"}'); chk "$o" "POST settings (checkbox off)"
+n=$((n+1)); [ "$(php $Q "select value from glpi_configs where context='plugin:surge' and name='notify_oncall'")" = 0 ] && echo "  ok  unticked box saved as off" || { bad=$((bad+1)); echo "SORUN notify_oncall"; }
+php $Q "update glpi_configs set value='1' where context='plugin:surge' and name='notify_oncall'" >/dev/null
 # ticket banner (rendered through the hook)
 T=$(php $Q "select tickets_id from glpi_plugin_surge_items where surges_id=$SID and is_removed=0 limit 1")
 cat > /tmp/srb.php <<PHP

@@ -1,0 +1,912 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Surge\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: front/config.php:100
+msgid "Enabled"
+msgstr "Ativado"
+
+#: front/config.php:100
+msgid "Off by default."
+msgstr "Desativado por padrão."
+
+#: front/config.php:101
+msgid "Endpoint"
+msgstr "Endpoint"
+
+#: front/config.php:102
+msgid "Model"
+msgstr "Modelo"
+
+#: front/config.php:103
+msgid "API key"
+msgstr "Chave de API"
+
+#: front/config.php:104
+msgid "stored — type to change"
+msgstr "salva — digite para alterar"
+
+#: front/config.php:104
+msgid "none"
+msgstr "nenhuma"
+
+#: front/config.php:105
+msgid "Remove the stored key"
+msgstr "Remover a chave salva"
+
+#: front/config.php:106
+msgid "Weight"
+msgstr "Peso"
+
+#: front/config.php:107
+msgid "Weight: share of the semantic score in the final similarity (0 = words only, 1 = meaning only; 0.5 recommended)."
+msgstr "Peso: participação da pontuação semântica na similaridade final (0 = só palavras, 1 = só significado; recomendado 0,5)."
+
+#: front/config.php:108
+msgid "Save and test the connection"
+msgstr "Salvar e testar a conexão"
+
+#: front/config.php:111 front/oncall.php:55 front/rules.php:87
+msgid "Save"
+msgstr "Salvar"
+
+#: front/config.php:31
+msgid "Embedding server OK: %1$d dimensions, %2$.1f s. Similarity of two paraphrases: %3$d %%."
+msgstr "Servidor de embeddings OK: %1$d dimensões, %2$.1f s. Similaridade de duas paráfrases: %3$d %%."
+
+#: front/config.php:34
+msgid "Embedding server error: %s"
+msgstr "Erro do servidor de embeddings: %s"
+
+#: front/config.php:37
+msgid "Settings saved."
+msgstr "Configurações salvas."
+
+#: front/config.php:42 src/Ui.php:54
+msgid "Settings"
+msgstr "Configurações"
+
+#: front/config.php:54
+msgid "Very high"
+msgstr "Muito alta"
+
+#: front/config.php:54
+msgid "High"
+msgstr "Alta"
+
+#: front/config.php:54
+msgid "Medium"
+msgstr "Média"
+
+#: front/config.php:54
+msgid "Low"
+msgstr "Baixa"
+
+#: front/config.php:54
+msgid "Very low"
+msgstr "Muito baixa"
+
+#: front/config.php:59
+msgid "Handling"
+msgstr "Tratamento"
+
+#: front/config.php:60
+msgid "Master ticket urgency"
+msgstr "Urgência do chamado principal"
+
+#: front/config.php:61
+msgid "Master ticket impact"
+msgstr "Impacto do chamado principal"
+
+#: front/config.php:62
+msgid "Solving the master ticket solves every linked ticket"
+msgstr "Solucionar o chamado principal soluciona todos os chamados vinculados"
+
+#: front/config.php:62
+msgid "The same solution text is added to each open ticket of the surge; GLPI notifies the requesters as usual."
+msgstr "O mesmo texto de solução é adicionado a cada chamado aberto do incidente; o GLPI notifica os requerentes normalmente."
+
+#: front/config.php:63
+msgid "Link late tickets to the master automatically"
+msgstr "Vincular automaticamente chamados tardios ao principal"
+
+#: front/config.php:63
+msgid "Tickets that join a surge after its master ticket was created become its children too."
+msgstr "Chamados que entram no incidente depois da criação do chamado principal também se tornam filhos dele."
+
+#: front/config.php:64
+msgid "A surge keeps collecting tickets for (hours after its last ticket)"
+msgstr "Um incidente continua agrupando chamados por (horas após o último chamado)"
+
+#: front/config.php:69
+msgid "E-mail when a surge is detected"
+msgstr "E-mail quando um incidente é detectado"
+
+#: front/config.php:70
+msgid "Users"
+msgstr "Usuários"
+
+#: front/config.php:72
+msgid "Groups (all members)"
+msgstr "Grupos (todos os membros)"
+
+#: front/config.php:74
+msgid "Also e-mail whoever is on call"
+msgstr "Enviar e-mail também para quem está de plantão"
+
+#: front/config.php:74
+msgid "See the On-call tab. E-mails go through GLPI's notification queue and mail settings."
+msgstr "Veja a aba Plantão. Os e-mails passam pela fila de notificações e pelas configurações de e-mail do GLPI."
+
+#: front/config.php:78
+msgid "Notices for end users"
+msgstr "Avisos para usuários finais"
+
+#: front/config.php:79
+msgid "A notice is published from a surge page (\"Notice for end users\"). It appears at the top of the self-service portal for users of the surge's entities."
+msgstr "Um aviso é publicado na página de um incidente (“Aviso para usuários finais”). Ele aparece no topo do portal de autoatendimento para os usuários das entidades do incidente."
+
+#: front/config.php:80
+msgid "Show notices to central-interface users too"
+msgstr "Mostrar avisos também na interface padrão"
+
+#: front/config.php:80
+msgid "By default only self-service users see them."
+msgstr "Por padrão, só os usuários do autoatendimento os veem."
+
+#: front/config.php:81
+msgid "After resolution, keep showing the notice as \"resolved\" for (hours)"
+msgstr "Após a solução, mostrar o aviso como “resolvido” por (horas)"
+
+#: front/config.php:86
+msgid "Webhook"
+msgstr "Webhook"
+
+#: front/config.php:87
+msgid "URL"
+msgstr "URL"
+
+#: front/config.php:88
+msgid "Format"
+msgstr "Formato"
+
+#: front/config.php:88
+msgid "Generic JSON"
+msgstr "JSON genérico"
+
+#: front/config.php:89
+msgid "Sent when a surge is detected, gets a master ticket and is resolved. GLPI proxy settings are used. Leave empty to disable."
+msgstr "Enviado quando um incidente é detectado, recebe um chamado principal e é resolvido. Usa as configurações de proxy do GLPI. Deixe vazio para desativar."
+
+#: front/config.php:90
+msgid "Example payload"
+msgstr "Exemplo de conteúdo"
+
+#: front/config.php:98
+msgid "Semantic similarity (optional)"
+msgstr "Similaridade semântica (opcional)"
+
+#: front/config.php:99
+msgid "Adds meaning-based matching on top of word matching, so \"cannot log in to the VPN\" and \"remote access authentication failed\" can end up together. Needs an OpenAI-compatible /v1/embeddings endpoint that you run yourself (Ollama, llama.cpp with --embeddings, LocalAI…). Ticket titles and the beginning of descriptions are sent to it; if it is unreachable, detection falls back to word matching."
+msgstr "Adiciona correspondência por significado além das palavras: “não consigo entrar na VPN” e “falha na autenticação do acesso remoto” podem ser agrupados. Requer um endpoint /v1/embeddings compatível com OpenAI hospedado por você (Ollama, llama.cpp com --embeddings, LocalAI…). Os títulos e o início das descrições são enviados a ele; se estiver indisponível, a detecção usa só as palavras."
+
+#: front/oncall.php:26
+msgid "On-call rota saved."
+msgstr "Escala de plantão salva."
+
+#: front/oncall.php:30 src/Ui.php:53
+msgid "On-call"
+msgstr "Plantão"
+
+#: front/oncall.php:33
+msgid "On call now: %s"
+msgstr "De plantão agora: %s"
+
+#: front/oncall.php:33
+msgid "Nobody is on call right now."
+msgstr "Ninguém está de plantão agora."
+
+#: front/oncall.php:34
+msgid "notifying the on-call person is turned off in the settings"
+msgstr "o aviso ao plantão está desativado nas configurações"
+
+#: front/oncall.php:36
+msgid "On-call rota"
+msgstr "Escala de plantão"
+
+#: front/oncall.php:37
+msgid "When a surge is detected, the people on call at that moment receive an e-mail (with the recipients set in the settings). A slot ending before it starts runs overnight, e.g. 18:00 – 08:00."
+msgstr "Quando um incidente é detectado, quem está de plantão naquele momento recebe um e-mail (junto com os destinatários das configurações). Um turno que termina antes de começar atravessa a noite, ex.: 18:00 – 08:00."
+
+#: front/oncall.php:38
+msgid "Technician"
+msgstr "Técnico"
+
+#: front/oncall.php:39
+msgid "Days"
+msgstr "Dias"
+
+#: front/oncall.php:39
+msgid "Hours"
+msgstr "Horário"
+
+#: front/oncall.php:39 front/rules.php:68
+msgid "Comment"
+msgstr "Comentário"
+
+#: front/oncall.php:50
+msgid "From"
+msgstr "De"
+
+#: front/oncall.php:51
+msgid "To"
+msgstr "Até"
+
+#: front/oncall.php:54 front/rules.php:40 front/rules.php:64
+msgid "Active"
+msgstr "Ativa"
+
+#: front/oncall.php:55
+msgid "Add"
+msgstr "Adicionar"
+
+#: front/oncall.php:56 front/rules.php:91
+msgid "Delete"
+msgstr "Excluir"
+
+#: front/rules.php:102
+msgid "Test on current tickets"
+msgstr "Testar com os chamados atuais"
+
+#: front/rules.php:103
+msgid "%1$d open ticket(s) in the last %2$d minutes that are not in a surge yet"
+msgstr "%1$d chamado(s) aberto(s) nos últimos %2$d minutos que ainda não estão em um incidente"
+
+#: front/rules.php:114
+msgid "would become a surge"
+msgstr "viraria um incidente"
+
+#: front/rules.php:114
+msgid "similar, below the threshold"
+msgstr "semelhantes, abaixo do limite"
+
+#: front/rules.php:122
+msgid "No similar tickets in the window right now."
+msgstr "Nenhum chamado semelhante na janela no momento."
+
+#: front/rules.php:26
+msgid "Rule deleted."
+msgstr "Regra excluída."
+
+#: front/rules.php:30
+msgid "Rule saved."
+msgstr "Regra salva."
+
+#: front/rules.php:34 src/Ui.php:52
+msgid "Detection rules"
+msgstr "Regras de detecção"
+
+#: front/rules.php:38
+msgid "New rule"
+msgstr "Nova regra"
+
+#: front/rules.php:39 front/rules.php:62
+msgid "Rule"
+msgstr "Regra"
+
+#: front/rules.php:39 front/rules.php:71
+msgid "Condition"
+msgstr "Condição"
+
+#: front/rules.php:40 front/rules.php:65
+msgid "Entity"
+msgstr "Entidade"
+
+#: front/rules.php:45
+msgid "(and sub-entities)"
+msgstr "(e subentidades)"
+
+#: front/rules.php:63
+msgid "Name"
+msgstr "Nome"
+
+#: front/rules.php:67
+msgid "Include sub-entities"
+msgstr "Incluir subentidades"
+
+#: front/rules.php:72
+msgid "At least (tickets)"
+msgstr "Pelo menos (chamados)"
+
+#: front/rules.php:73
+msgid "Within (minutes)"
+msgstr "Em (minutos)"
+
+#: front/rules.php:74
+msgid "Same category"
+msgstr "Mesma categoria"
+
+#: front/rules.php:74
+msgid "Tickets without a category are grouped together."
+msgstr "Chamados sem categoria são agrupados entre si."
+
+#: front/rules.php:75
+msgid "Same location"
+msgstr "Mesma localização"
+
+#: front/rules.php:76
+msgid "Similar title / description"
+msgstr "Título / descrição semelhante"
+
+#: front/rules.php:76
+msgid "Turn off to group by category / location only (e.g. \"any 10 tickets about the VPN in 15 minutes\")."
+msgstr "Desative para agrupar só por categoria / localização (ex.: “quaisquer 10 chamados sobre a VPN em 15 minutos”)."
+
+#: front/rules.php:77
+msgid "Text similarity threshold"
+msgstr "Limite de similaridade de texto"
+
+#: front/rules.php:78
+msgid "0.25 loose · 0.35 balanced · 0.5 strict. Use \"Save and test\" to tune it on the current tickets."
+msgstr "0,25 flexível · 0,35 equilibrado · 0,5 rigoroso. Use “Salvar e testar” para ajustar com os chamados atuais."
+
+#: front/rules.php:79
+msgid "Ticket type"
+msgstr "Tipo de chamado"
+
+#: front/rules.php:80
+msgid "Any"
+msgstr "Qualquer"
+
+#: front/rules.php:80
+msgid "Incidents only"
+msgstr "Somente incidentes"
+
+#: front/rules.php:80
+msgid "Requests only"
+msgstr "Somente requisições"
+
+#: front/rules.php:83
+msgid "Only these categories"
+msgstr "Somente estas categorias"
+
+#: front/rules.php:83
+msgid "empty = all"
+msgstr "vazio = todas"
+
+#: front/rules.php:88
+msgid "Save and test"
+msgstr "Salvar e testar"
+
+#: front/rules.php:89
+msgid "Back"
+msgstr "Voltar"
+
+#: front/rules.php:91
+msgid "Delete this rule? Surges it found are kept."
+msgstr "Excluir esta regra? Os incidentes encontrados são mantidos."
+
+#: front/stats.php:23 src/Ui.php:50
+msgid "Statistics"
+msgstr "Estatísticas"
+
+#: front/stats.php:24
+msgid "Period"
+msgstr "Período"
+
+#: front/stats.php:26
+msgid "%d days"
+msgstr "%d dias"
+
+#: front/stats.php:30
+msgid "< 1 min"
+msgstr "< 1 min"
+
+#: front/stats.php:30 front/stats.php:31 front/surge.form.php:114
+msgid "%d min"
+msgstr "%d min"
+
+#: front/stats.php:31
+msgid "%.1f h"
+msgstr "%.1f h"
+
+#: front/stats.php:36 front/surge.php:38 src/Ui.php:50
+msgid "Surges"
+msgstr "Incidentes"
+
+#: front/stats.php:37
+msgid "Tickets absorbed"
+msgstr "Chamados agrupados"
+
+#: front/stats.php:37
+msgid "%.1f per surge"
+msgstr "%.1f por incidente"
+
+#: front/stats.php:38
+msgid "Time to detect"
+msgstr "Tempo para detectar"
+
+#: front/stats.php:38 front/stats.php:39
+msgid "median, from the first ticket"
+msgstr "mediana, a partir do primeiro chamado"
+
+#: front/stats.php:39
+msgid "Time to resolve"
+msgstr "Tempo para resolver"
+
+#: front/stats.php:40
+msgid "Handled as an incident"
+msgstr "Tratados como incidente"
+
+#: front/stats.php:40
+msgid "master ticket or problem"
+msgstr "chamado principal ou problema"
+
+#: front/stats.php:41 src/Surge.php:51
+msgid "Dismissed"
+msgstr "Descartado"
+
+#: front/stats.php:41
+msgid "false positives"
+msgstr "falsos positivos"
+
+#: front/stats.php:44
+msgid "Surges per week"
+msgstr "Incidentes por semana"
+
+#: front/stats.php:57
+msgid "Top categories"
+msgstr "Principais categorias"
+
+#: front/stats.php:59
+msgid "No surge in this period."
+msgstr "Nenhum incidente neste período."
+
+#: front/stats.php:63
+msgid "(no category)"
+msgstr "(sem categoria)"
+
+#: front/stats.php:65
+msgid "%1$d surge(s) · %2$d tickets"
+msgstr "%1$d incidente(s) · %2$d chamados"
+
+#: front/stats.php:69
+msgid "Top locations"
+msgstr "Principais localizações"
+
+#: front/surge.form.php:101
+msgid "Not a real incident? The tickets stay as they are."
+msgstr "Não é um incidente real? Os chamados continuam como estão."
+
+#: front/surge.form.php:101
+msgid "Dismiss"
+msgstr "Descartar"
+
+#: front/surge.form.php:102
+msgid "Reopen"
+msgstr "Reabrir"
+
+#: front/surge.form.php:113 front/surge.form.php:138 front/surge.php:70
+msgid "Tickets"
+msgstr "Chamados"
+
+#: front/surge.form.php:114
+msgid "Time span"
+msgstr "Duração"
+
+#: front/surge.form.php:115 front/surge.php:71
+msgid "Category / location"
+msgstr "Categoria / localização"
+
+#: front/surge.form.php:116
+msgid "Detected by"
+msgstr "Detectado por"
+
+#: front/surge.form.php:121 front/surge.php:71
+msgid "Arrivals"
+msgstr "Chegadas"
+
+#: front/surge.form.php:124
+msgid "Common words"
+msgstr "Palavras em comum"
+
+#: front/surge.form.php:139
+msgid "Ticket"
+msgstr "Chamado"
+
+#: front/surge.form.php:139
+msgid "Requester"
+msgstr "Requerente"
+
+#: front/surge.form.php:139
+msgid "Opened"
+msgstr "Aberto em"
+
+#: front/surge.form.php:139 front/surge.php:70
+msgid "Status"
+msgstr "Status"
+
+#: front/surge.form.php:140
+msgid "Text similarity to the surge"
+msgstr "Similaridade do texto com o incidente"
+
+#: front/surge.form.php:140
+msgid "Match"
+msgstr "Correspondência"
+
+#: front/surge.form.php:150
+msgid "Not part of this incident"
+msgstr "Não faz parte deste incidente"
+
+#: front/surge.form.php:158
+msgid "Major incident"
+msgstr "Incidente grave"
+
+#: front/surge.form.php:160
+msgid "Master ticket"
+msgstr "Chamado principal"
+
+#: front/surge.form.php:162
+msgid "Master ticket title"
+msgstr "Título do chamado principal"
+
+#: front/surge.form.php:162 src/Surge.php:331
+msgid "[Major incident] %s"
+msgstr "[Incidente grave] %s"
+
+#: front/surge.form.php:163
+msgid "Create master ticket and link all"
+msgstr "Criar chamado principal e vincular todos"
+
+#: front/surge.form.php:164
+msgid "Every ticket of the surge becomes a child of the master. New tickets joining the surge are linked automatically."
+msgstr "Cada chamado do incidente vira filho do principal. Novos chamados são vinculados automaticamente."
+
+#: front/surge.form.php:169
+msgid "Create a problem and link all"
+msgstr "Criar um problema e vincular todos"
+
+#: front/surge.form.php:178
+msgid "Notice for end users"
+msgstr "Aviso para usuários finais"
+
+#: front/surge.form.php:179
+msgid "Published"
+msgstr "Publicado"
+
+#: front/surge.form.php:180
+msgid "Shown at the top of the self-service portal for users of the same entities, so they do not open the same ticket again. Ticket details are never shown."
+msgstr "Exibido no topo do portal de autoatendimento para os usuários das mesmas entidades, para que não abram o mesmo chamado de novo. Detalhes dos chamados nunca são exibidos."
+
+#: front/surge.form.php:183
+msgid "Update notice"
+msgstr "Atualizar aviso"
+
+#: front/surge.form.php:183
+msgid "Publish notice"
+msgstr "Publicar aviso"
+
+#: front/surge.form.php:186
+msgid "Withdraw notice"
+msgstr "Retirar aviso"
+
+#: front/surge.form.php:188
+msgid "Shown as \"resolved\" for %d hour(s) after resolution."
+msgstr "Exibido como “resolvido” por %d hora(s) após a solução."
+
+#: front/surge.form.php:194
+msgid "Tell everyone"
+msgstr "Avisar todos"
+
+#: front/surge.form.php:195
+msgid "e.g. We are aware of the mail outage and working on it. Next update at 10:30."
+msgstr "ex.: Estamos cientes da queda do e-mail e trabalhando nisso. Próxima atualização às 10:30."
+
+#: front/surge.form.php:196
+msgid "Add as public follow-up to all open tickets"
+msgstr "Adicionar como acompanhamento público a todos os chamados abertos"
+
+#: front/surge.form.php:198
+msgid "Resolve"
+msgstr "Solucionar"
+
+#: front/surge.form.php:199
+msgid "e.g. The mail server was restarted at 10:12; mail works again."
+msgstr "ex.: O servidor de e-mail foi reiniciado às 10:12; o e-mail voltou a funcionar."
+
+#: front/surge.form.php:200
+msgid "Solve every open ticket of this surge with this solution?"
+msgstr "Solucionar todos os chamados abertos deste incidente com esta solução?"
+
+#: front/surge.form.php:200
+msgid "Solve all tickets"
+msgstr "Solucionar todos os chamados"
+
+#: front/surge.form.php:201
+msgid "Solving the master ticket in GLPI does the same automatically."
+msgstr "Solucionar o chamado principal no GLPI faz o mesmo automaticamente."
+
+#: front/surge.form.php:205
+msgid "Acknowledged by %1$s on %2$s"
+msgstr "Assumido por %1$s em %2$s"
+
+#: front/surge.form.php:39
+msgid "Master ticket #%d created and linked."
+msgstr "Chamado principal #%d criado e vinculado."
+
+#: front/surge.form.php:43
+msgid "Problem %d created and linked."
+msgstr "Problema %d criado e vinculado."
+
+#: front/surge.form.php:47
+msgid "Write the message first."
+msgstr "Escreva a mensagem primeiro."
+
+#: front/surge.form.php:50
+msgid "Follow-up added to %d ticket(s)."
+msgstr "Acompanhamento adicionado a %d chamado(s)."
+
+#: front/surge.form.php:50 front/surge.form.php:57
+msgid "%d ticket(s) skipped (no right)."
+msgstr "%d chamado(s) ignorado(s) (sem permissão)."
+
+#: front/surge.form.php:54
+msgid "Write the solution first."
+msgstr "Escreva a solução primeiro."
+
+#: front/surge.form.php:57
+msgid "%d ticket(s) solved."
+msgstr "%d chamado(s) solucionado(s)."
+
+#: front/surge.form.php:61
+msgid "Notice published on the self-service portal."
+msgstr "Aviso publicado no portal de autoatendimento."
+
+#: front/surge.form.php:98
+msgid "Acknowledge"
+msgstr "Assumir"
+
+#: front/surge.php:24
+msgid "Detection finished: %1$d new surge(s), %2$d ticket(s) added to existing ones."
+msgstr "Detecção concluída: %1$d novo(s) incidente(s), %2$d chamado(s) adicionado(s) aos existentes."
+
+#: front/surge.php:45
+msgid "Open"
+msgstr "Abertos"
+
+#: front/surge.php:49
+msgid "All"
+msgstr "Todos"
+
+#: front/surge.php:56
+msgid "Run detection now"
+msgstr "Detectar agora"
+
+#: front/surge.php:64
+msgid "No surge here. All quiet."
+msgstr "Nenhum incidente. Tudo tranquilo."
+
+#: front/surge.php:65
+msgid "%d active detection rule."
+msgid_plural "%d active detection rules."
+msgstr[0] "%d regra de detecção ativa."
+msgstr[1] "%d regras de detecção ativas."
+
+#: front/surge.php:70 src/Surge.php:41
+msgid "Surge"
+msgid_plural "Surges"
+msgstr[0] "Incidente"
+msgstr[1] "Incidentes"
+
+#: front/surge.php:71
+msgid "First / last ticket"
+msgstr "Primeiro / último chamado"
+
+#: front/surge.php:72
+msgid "Master ticket / problem"
+msgstr "Chamado principal / problema"
+
+#: hook.php:121 front/rules.php:57
+msgid "Same category, similar text"
+msgstr "Mesma categoria, texto semelhante"
+
+#: hook.php:122
+msgid "Default rule: 5 or more open tickets in 30 minutes, same category, similar title or description."
+msgstr "Regra padrão: 5 ou mais chamados abertos em 30 minutos, mesma categoria, título ou descrição semelhante."
+
+#: src/Mailer.php:64
+msgid "[Surge] %1$s — %2$d similar tickets"
+msgstr "[Surge] %1$s — %2$d chamados semelhantes"
+
+#: src/Mailer.php:66
+msgid "A burst of similar tickets was detected: %1$d tickets in %2$d minutes."
+msgstr "Um pico de chamados semelhantes foi detectado: %1$d chamados em %2$d minutos."
+
+#: src/Mailer.php:67
+msgid "Category"
+msgstr "Categoria"
+
+#: src/Mailer.php:68
+msgid "Location"
+msgstr "Localização"
+
+#: src/Mailer.php:82 src/TicketHooks.php:88
+msgid "Open surge"
+msgstr "Abrir incidente"
+
+#: src/Notifier.php:36
+msgid "Surge detected"
+msgstr "Incidente detectado"
+
+#: src/Notifier.php:37
+msgid "Major incident opened"
+msgstr "Incidente grave aberto"
+
+#: src/Notifier.php:38
+msgid "Surge resolved"
+msgstr "Incidente resolvido"
+
+#: src/OnCall.php:112
+msgid "every day"
+msgstr "todos os dias"
+
+#: src/OnCall.php:112
+msgid "weekdays"
+msgstr "dias úteis"
+
+#: src/OnCall.php:112
+msgid "weekends"
+msgstr "fins de semana"
+
+#: src/OnCall.php:23
+msgid "Mon"
+msgstr "Seg"
+
+#: src/OnCall.php:23
+msgid "Tue"
+msgstr "Ter"
+
+#: src/OnCall.php:23
+msgid "Wed"
+msgstr "Qua"
+
+#: src/OnCall.php:23
+msgid "Thu"
+msgstr "Qui"
+
+#: src/OnCall.php:23
+msgid "Fri"
+msgstr "Sex"
+
+#: src/OnCall.php:23
+msgid "Sat"
+msgstr "Sáb"
+
+#: src/OnCall.php:23
+msgid "Sun"
+msgstr "Dom"
+
+#: src/Profile.php:55
+msgid "See surges"
+msgstr "Ver incidentes"
+
+#: src/Profile.php:56
+msgid "Handle surges (master ticket, problem, broadcast, resolve)"
+msgstr "Tratar incidentes (chamado principal, problema, aviso, solução)"
+
+#: src/Profile.php:57
+msgid "Detection rules and settings"
+msgstr "Regras de detecção e configurações"
+
+#: src/Rule.php:102
+msgid "≥ %1$d tickets in %2$d min"
+msgstr "≥ %1$d chamados em %2$d min"
+
+#: src/Rule.php:104
+msgid "same category"
+msgstr "mesma categoria"
+
+#: src/Rule.php:107
+msgid "same location"
+msgstr "mesma localização"
+
+#: src/Rule.php:110
+msgid "similar text (%d %%)"
+msgstr "texto semelhante (%d %%)"
+
+#: src/Rule.php:113
+msgid "incidents only"
+msgstr "somente incidentes"
+
+#: src/Rule.php:115
+msgid "requests only"
+msgstr "somente requisições"
+
+#: src/Rule.php:63
+msgid "Unnamed rule"
+msgstr "Regra sem nome"
+
+#: src/Surge.php:319 src/Surge.php:366
+msgid "Surge not found."
+msgstr "Incidente não encontrado."
+
+#: src/Surge.php:325
+msgid "You are not allowed to create tickets."
+msgstr "Você não tem permissão para criar chamados."
+
+#: src/Surge.php:333
+msgid "Major incident opened by Surge from %1$d similar tickets received between %2$s and %3$s."
+msgstr "Incidente grave aberto pelo Surge a partir de %1$d chamados semelhantes recebidos entre %2$s e %3$s."
+
+#: src/Surge.php:350
+msgid "The master ticket could not be created."
+msgstr "Não foi possível criar o chamado principal."
+
+#: src/Surge.php:372
+msgid "You are not allowed to create problems."
+msgstr "Você não tem permissão para criar problemas."
+
+#: src/Surge.php:377
+msgid "Problem opened by Surge from %d similar tickets."
+msgstr "Problema aberto pelo Surge a partir de %d chamados semelhantes."
+
+#: src/Surge.php:384
+msgid "The problem could not be created."
+msgstr "Não foi possível criar o problema."
+
+#: src/Surge.php:470
+msgid "We are aware of an issue: %s. Our team is working on it — there is no need to open a new ticket. We will post an update here."
+msgstr "Estamos cientes de um problema: %s. Nossa equipe está trabalhando nisso — não é preciso abrir um novo chamado. Publicaremos novidades aqui."
+
+#: src/Surge.php:477
+msgid "Write the notice first."
+msgstr "Escreva o aviso primeiro."
+
+#: src/Surge.php:48
+msgid "New"
+msgstr "Novo"
+
+#: src/Surge.php:49
+msgid "In progress"
+msgstr "Em andamento"
+
+#: src/Surge.php:50
+msgid "Resolved"
+msgstr "Resolvido"
+
+#: src/Surge.php:506
+msgid "Resolved: %s"
+msgstr "Resolvido: %s"
+
+#: src/Surge.php:60
+msgid "Detect bursts of similar tickets (major incidents)"
+msgstr "Detectar picos de chamados semelhantes (incidentes graves)"
+
+#: src/Surge.php:71
+msgid "%d new surge(s)"
+msgstr "%d novo(s) incidente(s)"
+
+#: src/TicketHooks.php:82
+msgid "Master ticket of surge #%1$d — %2$d linked tickets."
+msgstr "Chamado principal do incidente #%1$d — %2$d chamados vinculados."
+
+#: src/TicketHooks.php:83
+msgid "Part of surge #%1$d — %2$d similar tickets in %3$d min."
+msgstr "Parte do incidente #%1$d — %2$d chamados semelhantes em %3$d min."
+
+#: src/TicketHooks.php:85
+msgid "Master ticket: #%d."
+msgstr "Chamado principal: #%d."
+
+#: src/Ui.php:57
+msgid "Bursts of similar tickets, handled as one major incident"
+msgstr "Picos de chamados semelhantes, tratados como um único incidente grave"
+
+#: src/Ui.php:92
+msgid "Ticket arrivals"
+msgstr "Chegada de chamados"

@@ -142,8 +142,9 @@ class Surge extends CommonGLPI
     /**
      * Creates a surge from detected tickets.
      * @param array<int,array<string,mixed>> $tickets @param array<int,array<string,float>> $vec
+     * @param array<int,float> $scores similarity of each ticket to the surge (hybrid when embeddings are on)
      */
-    public static function create(array $rule, array $tickets, array $vec): int
+    public static function create(array $rule, array $tickets, array $vec, array $scores = []): int
     {
         /** @var \DBmysql $DB */
         global $DB;
@@ -189,7 +190,7 @@ class Surge extends CommonGLPI
         ]);
         $sid = (int) $DB->insertId();
         foreach ($tickets as $id => $t) {
-            self::addTicket($sid, $id, Text::cosine($vec[$id], $cent), false);
+            self::addTicket($sid, $id, $scores[$id] ?? Text::cosine($vec[$id], $cent), false);
         }
         self::refresh($sid);
         return $sid;
@@ -459,6 +460,128 @@ class Surge extends CommonGLPI
         global $DB;
         $DB->update(self::ITEMS, ['is_removed' => 1], ['surges_id' => $sid, 'tickets_id' => $tid]);
         self::refresh($sid);
+    }
+
+    // ------------------------------------------------------------------ public notice (self-service portal)
+
+    /** Default notice text for a surge. */
+    public static function defaultNotice(array $s): string
+    {
+        return sprintf(__('We are aware of an issue: %s. Our team is working on it — there is no need to open a new ticket. We will post an update here.', 'surge'), $s['name']);
+    }
+
+    public static function publishNotice(int $sid, string $message): void
+    {
+        $message = trim(mb_substr($message, 0, 1000));
+        if ($message === '') {
+            throw new \RuntimeException(__('Write the notice first.', 'surge'));
+        }
+        self::touch($sid, ['public_message' => $message, 'is_public' => 1, 'date_public' => date('Y-m-d H:i:s')]);
+    }
+
+    public static function unpublishNotice(int $sid): void
+    {
+        self::touch($sid, ['is_public' => 0]);
+    }
+
+    /**
+     * Notices the current user may see: published surges of their active entities that are open, or resolved recently
+     * (shown as "resolved"). @return list<array{id:int,message:string,resolved:bool,date:string}>
+     */
+    public static function notices(): array
+    {
+        /** @var \DBmysql $DB */
+        global $DB;
+        $hours = Config::int('notice_resolved_hours');
+        $where = ['is_public' => 1, 'OR' => [['status' => [self::NEW, self::ACTIVE]]]];
+        if ($hours > 0) {
+            $where['OR'][] = ['status' => self::RESOLVED, 'date_resolved' => ['>=', date('Y-m-d H:i:s', time() - $hours * 3600)]];
+        }
+        $out = [];
+        foreach ($DB->request(['FROM' => self::TABLE, 'WHERE' => $where + getEntitiesRestrictCriteria(self::TABLE, '', '', false), 'ORDER' => 'date_public DESC', 'LIMIT' => 5]) as $r) {
+            $resolved = $r['status'] === self::RESOLVED;
+            $out[] = [
+                'id'       => (int) $r['id'],
+                // only the agent-written text is shown (the surge name comes from a ticket title and may be personal)
+                'message'  => $resolved ? sprintf(__('Resolved: %s', 'surge'), $r['public_message']) : (string) $r['public_message'],
+                'resolved' => $resolved,
+                'date'     => (string) ($resolved ? $r['date_resolved'] : $r['date_public']),
+            ];
+        }
+        return $out;
+    }
+
+    // ------------------------------------------------------------------ statistics
+
+    /**
+     * Figures for the statistics page over the last $days days (surges first seen in that period, user's entities).
+     * @return array<string,mixed>
+     */
+    public static function stats(int $days): array
+    {
+        /** @var \DBmysql $DB */
+        global $DB;
+        $since = date('Y-m-d H:i:s', time() - $days * 86400);
+        $rows = iterator_to_array($DB->request(['FROM' => self::TABLE, 'WHERE' => ['date_first' => ['>=', $since]] + getEntitiesRestrictCriteria(self::TABLE, '', '', false)]));
+        $median = static function (array $a): ?float {
+            if (!$a) {
+                return null;
+            }
+            sort($a);
+            $n = count($a);
+            return $n % 2 ? (float) $a[intdiv($n, 2)] : ($a[$n / 2 - 1] + $a[$n / 2]) / 2;
+        };
+        $detect = [];
+        $resolve = [];
+        $byCat = [];
+        $byLoc = [];
+        $byWeek = [];
+        $status = array_fill_keys(array_keys(self::statuses()), 0);
+        $tickets = 0;
+        $master = 0;
+        foreach ($rows as $r) {
+            $first = strtotime((string) $r['date_first']);
+            $tickets += (int) $r['ticket_count'];
+            $status[$r['status']] = ($status[$r['status']] ?? 0) + 1;
+            $master += (int) $r['tickets_id_master'] > 0 || (int) $r['problems_id'] > 0 ? 1 : 0;
+            if ($r['date_creation']) {
+                $detect[] = max(0, strtotime((string) $r['date_creation']) - $first) / 60;
+            }
+            if ($r['status'] === self::RESOLVED && $r['date_resolved']) {
+                $resolve[] = max(0, strtotime((string) $r['date_resolved']) - $first) / 3600;
+            }
+            $c = (int) $r['itilcategories_id'];
+            $byCat[$c] ??= ['surges' => 0, 'tickets' => 0];
+            $byCat[$c]['surges']++;
+            $byCat[$c]['tickets'] += (int) $r['ticket_count'];
+            if ((int) $r['locations_id'] > 0) {
+                $byLoc[(int) $r['locations_id']] = ($byLoc[(int) $r['locations_id']] ?? 0) + 1;
+            }
+            $wk = date('o-\WW', $first);
+            $byWeek[$wk] = ($byWeek[$wk] ?? 0) + 1;
+        }
+        uasort($byCat, static fn($a, $b) => $b['tickets'] <=> $a['tickets']);
+        arsort($byLoc);
+        // continuous weeks (oldest → newest)
+        $weeks = [];
+        for ($t = strtotime('monday this week', time() - $days * 86400); $t <= time(); $t += 7 * 86400) {
+            $k = date('o-\WW', $t);
+            $weeks[$k] = $byWeek[$k] ?? 0;
+        }
+        $n = count($rows);
+        return [
+            'surges'        => $n,
+            'tickets'       => $tickets,
+            'avg_tickets'   => $n ? $tickets / $n : 0,
+            'detect_min'    => $median($detect),
+            'resolve_h'     => $median($resolve),
+            'handled_pct'   => $n ? 100 * $master / $n : 0,
+            'dismissed_pct' => $n ? 100 * $status[self::DISMISSED] / $n : 0,
+            'status'        => $status,
+            'categories'    => array_slice($byCat, 0, 8, true),
+            'locations'     => array_slice($byLoc, 0, 8, true),
+            'weeks'         => array_slice($weeks, -26, null, true),
+        ];
     }
 
     /** Arrivals per time bucket for the sparkline. @return list<int> */

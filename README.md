@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/CodeByPinar/glpi-surge/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badges-dark.svg"><img src="docs/readme/badges-light.svg" alt="Surge release · GLPI 11 and 12 · PHP 8.2+ · GPL-3.0 · English and Turkish · no external calls"></picture></a>
+  <a href="https://github.com/CodeByPinar/glpi-surge/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/readme/badges-dark.svg"><img src="docs/readme/badges-light.svg" alt="Surge release · GLPI 11 and 12 · PHP 8.2+ · GPL-3.0 · 6 languages · no external calls"></picture></a>
 </p>
 
 <p align="center">
@@ -69,6 +69,14 @@ OPENING — urgent"* and *"Email not syncing in Outlook"*. A printer ticket in t
 Time window, minimum count, same category / location, similarity threshold, ticket type, categories, entity.
 **Save and test** shows what a rule would group *right now*, without creating anything.
 
+**🧬 Optional semantic matching** <sup>0.2</sup>
+Plug in a local embedding model (Ollama, llama.cpp…) and *"cannot log in to the VPN"* joins *"remote access
+authentication failed"* — no shared words needed.
+
+**📊 Statistics** <sup>0.2</sup>
+Time to detect, time to resolve, tickets absorbed per incident, false-positive rate, top categories and locations,
+surges per week.
+
 </td>
 <td width="50%" valign="top">
 
@@ -80,19 +88,25 @@ automatically. You can also open a **problem** and link everything to it.
 One public follow-up goes to every open ticket, and GLPI notifies the requesters as usual. Solving the master
 ticket solves every linked ticket with the same solution.
 
-**🔔 Banner & webhooks**
-A banner on every ticket of a surge tells the agent what is going on. Webhooks go to Slack, Microsoft Teams or any
-HTTP endpoint on *detected*, *master ticket* and *resolved*.
+**🌐 Stop the duplicates at the source** <sup>0.2</sup>
+Publish a notice on the self-service portal — *"We are aware of the network outage on floor 3"* — so users stop
+opening the same ticket. It turns into *"resolved"* when you fix it.
+
+**📟 On-call & alerts** <sup>0.2</sup>
+A built-in on-call rota: whoever is on duty (plus fixed recipients) is e-mailed through GLPI's own notification
+queue. Webhooks go to Slack, Microsoft Teams or any HTTP endpoint. A banner on every ticket of a surge tells the
+agent what is going on.
 
 </td>
 </tr>
 </table>
 
-- **Private by design.** Detection is plain PHP running inside GLPI. No AI service, no external call, no tickets
-  leaving your server (webhooks are opt-in).
+- **Private by design.** Detection is plain PHP running inside GLPI. No cloud AI and no external call. Semantic
+  matching is opt-in and talks only to a model *you* host, and webhooks are opt-in too.
 - **Respects GLPI rights.** Every action checks the user's right on each ticket. Tickets the user cannot update are
-  skipped and reported.
-- **One code base for GLPI 11 and GLPI 12**, English and Turkish included, translation-ready.
+  skipped and reported. Portal notices show only the text an agent wrote, never ticket details.
+- **One code base for GLPI 11 and GLPI 12.** 6 languages: English, French, German, Spanish, Portuguese (Brazil) and
+  Turkish.
 
 ---
 
@@ -119,6 +133,22 @@ HTTP endpoint on *detected*, *master ticket* and *resolved*.
 <td width="50%" align="center" valign="top">
 <img src="docs/screenshots/surge-major-incident.png" alt="Surge in progress with a master ticket"><br>
 <sub><b>Major incident in progress.</b> The master ticket is created and every ticket is linked.</sub>
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/screenshots/stats.png" alt="Statistics page"><br>
+<sub><b>Statistics.</b> Time to detect, tickets absorbed, top categories, surges per week.</sub>
+</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<img src="docs/screenshots/portal-notice.png" alt="Notice on the self-service portal"><br>
+<sub><b>Notice on the self-service portal.</b> End users learn about the outage before opening yet another ticket.</sub>
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/screenshots/oncall.png" alt="On-call rota"><br>
+<sub><b>On-call rota.</b> Weeknights, weekends, office hours — whoever is on duty gets the e-mail.</sub>
 </td>
 <td width="50%" align="center" valign="top">
 <img src="docs/screenshots/rule.png" alt="Detection rule form"><br>
@@ -185,6 +215,23 @@ These are the scores from the demo data shown in the screenshots (rule: same cat
 | Outlook closes immediately | 40 % | ✅ |
 | Printer on floor 2 out of toner | — | ➖ not grouped |
 | Password reset for the HR portal | — | ➖ not grouped |
+
+### Semantic similarity (optional)
+
+Words are not everything: *"cannot log in to the VPN"* and *"remote access authentication failed"* share no word at
+all. With **semantic similarity** enabled (Settings), Surge also asks an embedding model that **you host** for a
+vector per ticket and blends both scores:
+
+```text
+similarity = (1 − w) · TF-IDF cosine  +  w · embedding cosine        (w = 0.5 by default)
+```
+
+- Any OpenAI-compatible `/v1/embeddings` endpoint works: [Ollama](https://ollama.com) (`nomic-embed-text`,
+  `mxbai-embed-large`, `bge-m3`…), llama.cpp `llama-server --embeddings`, LocalAI, vLLM.
+- Only the ticket title and the beginning of the description are sent. Vectors are cached per ticket and model.
+- If the endpoint is down, detection silently falls back to TF-IDF (the error is logged in `files/_log/surge.log`).
+- **Save and test the connection** on the settings page shows the dimensions, the latency and how close two
+  paraphrases are.
 
 Every member's score is shown on the surge page. A wrong member can be removed with one click and will never be added
 back.
@@ -303,6 +350,25 @@ can run next to the default one.
 | Link late tickets to the master automatically | ✔ | Tickets joining after the master was created become its children |
 | Surge keeps collecting tickets for | 24 h | After its last ticket |
 | Webhook URL / format | — / generic | Generic JSON, Slack or Microsoft Teams (workflow) |
+| E-mail: users, groups | — | Fixed recipients when a surge is detected |
+| E-mail whoever is on call | ✔ | Uses the **On-call** rota (days, hours, overnight slots) |
+| Show notices to central-interface users | ✘ | By default notices appear on the self-service portal only |
+| Keep a resolved notice for | 2 h | Shown as *"Resolved: …"*, then hidden |
+| Semantic similarity: endpoint, model, key, weight | off | See *How it works* |
+
+### Notices for end users
+
+On a surge page, **Notice for end users** publishes a short text written by the agent (a suggestion is pre-filled).
+It appears at the top of every self-service page for users of the surge's entities, can be dismissed by the user for
+their session, and switches to *"Resolved: …"* when the surge is solved. Ticket titles, requesters and other details
+are **never** shown.
+
+### On-call and e-mail
+
+**Assistance → Surge → On-call** holds a simple rota: technician, days, hours (`18:00 – 08:00` runs overnight). When
+a surge is detected, whoever is on call — plus the fixed users / groups from the settings — gets an e-mail with the
+tickets and a link. Messages go through GLPI's **notification queue** and mail settings, so retries and the
+*Notification queue* screen work as usual. Nothing is sent while GLPI e-mail notifications are disabled.
 
 ### Rights — *Administration → Profiles → Surge*
 
@@ -374,8 +440,9 @@ the same location. **Save and test** shows the effect immediately.
 <details>
 <summary><b>Does it need an AI model or an internet connection?</b></summary>
 
-No. The similarity is classic information retrieval (TF-IDF + cosine) implemented in a few hundred lines of PHP. It is
-fast, explainable (you see each ticket's score) and nothing leaves your server.
+No. The default similarity is classic information retrieval (TF-IDF + cosine) implemented in a few hundred lines of PHP.
+It is fast, explainable (you see each ticket's score) and nothing leaves your server. Semantic matching is an optional
+extra that uses an embedding model **you** run; it is off by default.
 </details>
 
 <details>
@@ -397,8 +464,8 @@ ticket and once every 5 minutes.
 <details>
 <summary><b>Can end users see surges?</b></summary>
 
-Not yet. Rights are for central-interface profiles. A self-service banner (*"We know about the mail outage"*) is on the
-roadmap.
+They see only what an agent publishes as a **notice** (see *Configuration*), never the surge itself or its tickets.
+The surge pages are for central-interface profiles with the Surge rights.
 </details>
 
 ---
@@ -407,7 +474,7 @@ roadmap.
 
 | | GLPI 11.0.x | GLPI 12.0.x |
 |---|:---:|:---:|
-| Surge 0.1 | ✅ tested | ✅ tested |
+| Surge 0.1 – 0.2 | ✅ tested | ✅ tested |
 
 Tested with MariaDB / MySQL as shipped with GLPI. The same archive installs on both versions.
 
@@ -415,12 +482,21 @@ Tested with MariaDB / MySQL as shipped with GLPI. The same archive installs on b
 
 ## 🗺️ Roadmap
 
-- [ ] Self-service banner: *"We are aware of the mail outage"* on the end-user portal
-- [ ] Statistics: time to detect, tickets absorbed per incident, top surge categories
-- [ ] Notify the on-call technician (companion plugin)
-- [ ] Optional semantic similarity with a local embedding model, on top of TF-IDF
-- [ ] More languages for stop words and the user interface
-- [ ] GLPI Marketplace listing
+Done in 0.2:
+
+- [x] Self-service notice: *"We are aware of the mail outage"* on the end-user portal
+- [x] Statistics: time to detect, tickets absorbed per incident, top surge categories
+- [x] Notify the on-call technician (built-in on-call rota)
+- [x] Optional semantic similarity with a local embedding model, on top of TF-IDF
+- [x] More languages for stop words and the user interface (FR, DE, ES, PT-BR)
+- [x] GLPI plugin catalogue descriptor (`plugin.xml`)
+
+Next:
+
+- [ ] Suggest the matching notice while an end user is writing a new ticket
+- [ ] Merge two surges / move a ticket between surges
+- [ ] Export statistics (CSV) and a dashboard card
+- [ ] Listing on the GLPI Marketplace
 
 Ideas and feedback are welcome in [Issues](https://github.com/CodeByPinar/glpi-surge/issues).
 
@@ -436,14 +512,18 @@ src/Surge.php            surge data, actions, automatic action
 src/Rule.php · Config.php   detection rules, settings
 src/TicketHooks.php      detection on ticket creation, cascading solutions, ticket banner
 src/Notifier.php         webhooks
-front/                   pages (surges, surge, rules, settings)
-locales/                 surge.pot · tr_TR · en_GB
+src/Mailer.php · OnCall.php   e-mail through GLPI's queue, on-call rota
+src/Embeddings.php       optional semantic similarity (OpenAI-compatible /v1/embeddings, cached vectors)
+front/                   pages (surges, surge, statistics, rules, on-call, settings, notice JSON)
+locales/                 surge.pot · en_GB · fr_FR · de_DE · es_ES · pt_BR · tr_TR
 tools/                   i18n.py (extract, merge, compile), package.py (release archives)
 tests/                   integration tests and demo data for a GLPI test instance
 ```
 
 - **Tests.** `tests/surge_test.php` has 27 checks: text processing, detection, every action and the cascade.
-  `tests/surge_pages.sh` has 30: every page, every POST action and the rights. Both pass on GLPI 11 and 12. They expect
+  `tests/surge_v2_test.php` has 36: languages, on-call slots, e-mail queue, notices, statistics, semantic matching
+  (with `tests/embed_mock.py`).
+  `tests/surge_pages.sh` has 42: every page, every POST action and the rights. Both pass on GLPI 11 and 12. They expect
   a disposable GLPI instance with a small CLI boot helper. **Never run them on production.**
 - **Demo data.** `php tests/demo.php <instance> create` (and `clean`) builds the scenario used in the screenshots on a
   test instance.

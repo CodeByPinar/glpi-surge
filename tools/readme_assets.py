@@ -80,7 +80,7 @@ def badges(theme):
         ('glpi', 'GLPI', '11 · 12'),
         ('php', 'PHP', '8.2+'),
         ('scale', 'License', 'GPL-3.0'),
-        ('globe', 'i18n', 'EN · TR'),
+        ('globe', 'Languages', '6'),
         ('shield', 'External calls', 'none'),
     ]
     h, gap, x, parts = 34, 10, 0.0, []

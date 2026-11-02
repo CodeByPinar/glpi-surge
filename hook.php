@@ -10,6 +10,8 @@
  */
 
 use GlpiPlugin\Surge\Config;
+use GlpiPlugin\Surge\Embeddings;
+use GlpiPlugin\Surge\OnCall;
 use GlpiPlugin\Surge\Profile;
 use GlpiPlugin\Surge\Rule;
 use GlpiPlugin\Surge\Surge;
@@ -75,10 +77,42 @@ function plugin_surge_install(): bool
             `date_add` TIMESTAMP NULL DEFAULT NULL,
             PRIMARY KEY (`id`), UNIQUE KEY `unicity` (`surges_id`, `tickets_id`), KEY `tickets_id` (`tickets_id`)
         )",
+        // 0.2.0 — on-call rota: who is notified when a surge is detected
+        OnCall::TABLE => "(
+            `id` INT {$sign} NOT NULL AUTO_INCREMENT,
+            `users_id` INT {$sign} NOT NULL DEFAULT 0,
+            `days` INT NOT NULL DEFAULT 127,
+            `time_start` CHAR(5) NOT NULL DEFAULT '00:00',
+            `time_end` CHAR(5) NOT NULL DEFAULT '24:00',
+            `is_active` TINYINT NOT NULL DEFAULT 1,
+            `comment` VARCHAR(255) NOT NULL DEFAULT '',
+            PRIMARY KEY (`id`), KEY `users_id` (`users_id`)
+        )",
+        // 0.2.0 — cached embedding vectors (optional semantic similarity)
+        Embeddings::TABLE => "(
+            `id` INT {$sign} NOT NULL AUTO_INCREMENT,
+            `tickets_id` INT {$sign} NOT NULL DEFAULT 0,
+            `model` VARCHAR(100) NOT NULL DEFAULT '',
+            `hash` CHAR(32) NOT NULL DEFAULT '',
+            `vector` MEDIUMTEXT NULL,
+            `date_creation` TIMESTAMP NULL DEFAULT NULL,
+            PRIMARY KEY (`id`), UNIQUE KEY `unicity` (`tickets_id`, `model`)
+        )",
     ];
     foreach ($tables as $name => $def) {
         if (!$DB->tableExists($name)) {
             $DB->doQuery("CREATE TABLE `{$name}` {$def} ENGINE=InnoDB DEFAULT CHARSET={$cs} COLLATE={$co} ROW_FORMAT=DYNAMIC");
+        }
+    }
+    // 0.2.0 — public notice for the self-service portal (added to existing installs)
+    foreach ([
+        'public_message' => "TEXT NULL",
+        'is_public'      => "TINYINT NOT NULL DEFAULT 0",
+        'date_public'    => "TIMESTAMP NULL DEFAULT NULL",
+        'notified'       => "TINYINT NOT NULL DEFAULT 0",
+    ] as $col => $def) {
+        if (!$DB->fieldExists(Surge::TABLE, $col)) {
+            $DB->doQuery("ALTER TABLE `" . Surge::TABLE . "` ADD `{$col}` {$def}");
         }
     }
 
@@ -102,7 +136,7 @@ function plugin_surge_uninstall(): bool
 {
     /** @var \DBmysql $DB */
     global $DB;
-    foreach ([Rule::TABLE, Surge::TABLE, Surge::ITEMS] as $t) {
+    foreach ([Rule::TABLE, Surge::TABLE, Surge::ITEMS, OnCall::TABLE, Embeddings::TABLE] as $t) {
         if ($DB->tableExists($t)) {
             $DB->doQuery("DROP TABLE `{$t}`");
         }

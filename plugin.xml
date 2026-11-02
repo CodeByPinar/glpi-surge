@@ -1,0 +1,86 @@
+<root>
+   <name>Surge</name>
+   <key>surge</key>
+   <state>stable</state>
+   <logo>https://raw.githubusercontent.com/CodeByPinar/glpi-surge/main/docs/logo.png</logo>
+   <description>
+      <short>
+         <en>Major incident detection: spots bursts of similar tickets in real time and lets the service desk handle them as one incident.</en>
+         <fr>Détection des incidents majeurs : repère en temps réel les afflux de tickets similaires et permet de les traiter comme un seul incident.</fr>
+         <de>Erkennung von Major Incidents: erkennt Häufungen ähnlicher Tickets in Echtzeit und bearbeitet sie als einen Vorfall.</de>
+         <es>Detección de incidentes mayores: detecta en tiempo real ráfagas de tickets similares y permite gestionarlas como un solo incidente.</es>
+         <pt>Detecção de incidentes graves: identifica em tempo real picos de chamados semelhantes e permite tratá-los como um único incidente.</pt>
+         <tr>Büyük olay tespiti: kısa sürede gelen benzer kayıtları anında yakalar, tek bir olay olarak yönetmenizi sağlar.</tr>
+      </short>
+      <long>
+         <en><![CDATA[
+When something breaks, the service desk receives the same complaint dozens of times in a few minutes. Surge recognises
+these bursts as they happen (text similarity with diacritic folding, stemming and TF-IDF, optional local embeddings) and
+groups them into one surge.
+
+* One click: master ticket or problem with every ticket linked; late tickets are linked automatically
+* One public follow-up to every requester; solving the master solves all linked tickets
+* Notice on the self-service portal ("We are aware of the mail outage") so users stop opening duplicates
+* E-mail to fixed recipients and to whoever is on call (built-in on-call rota); webhooks to Slack / Teams
+* Statistics: time to detect, tickets absorbed, top categories
+* Detection rules with a dry-run test; banner on every ticket of a surge
+* No external service required; English, French, German, Spanish, Portuguese (Brazil) and Turkish
+         ]]></en>
+      </long>
+   </description>
+   <homepage>https://github.com/CodeByPinar/glpi-surge</homepage>
+   <download>https://github.com/CodeByPinar/glpi-surge/releases</download>
+   <issues>https://github.com/CodeByPinar/glpi-surge/issues</issues>
+   <readme>https://github.com/CodeByPinar/glpi-surge/blob/main/README.md</readme>
+   <authors>
+      <author>Pınar Topuz</author>
+   </authors>
+   <versions>
+      <version>
+         <num>0.2.0</num>
+         <compatibility>~12.0</compatibility>
+         <download_url>https://github.com/CodeByPinar/glpi-surge/releases/download/v0.2.0/surge-0.2.0.tgz</download_url>
+      </version>
+      <version>
+         <num>0.2.0</num>
+         <compatibility>~11.0</compatibility>
+         <download_url>https://github.com/CodeByPinar/glpi-surge/releases/download/v0.2.0/surge-0.2.0.tgz</download_url>
+      </version>
+      <version>
+         <num>0.1.0</num>
+         <compatibility>~11.0</compatibility>
+         <download_url>https://github.com/CodeByPinar/glpi-surge/releases/download/v0.1.0/surge-0.1.0.tgz</download_url>
+      </version>
+   </versions>
+   <langs>
+      <lang>en_GB</lang>
+      <lang>fr_FR</lang>
+      <lang>de_DE</lang>
+      <lang>es_ES</lang>
+      <lang>pt_BR</lang>
+      <lang>tr_TR</lang>
+   </langs>
+   <license>GPL v3+</license>
+   <tags>
+      <en>
+         <tag>major incident</tag>
+         <tag>incident management</tag>
+         <tag>helpdesk</tag>
+         <tag>ITIL</tag>
+         <tag>notification</tag>
+         <tag>on-call</tag>
+      </en>
+      <fr>
+         <tag>incident majeur</tag>
+         <tag>gestion des incidents</tag>
+         <tag>helpdesk</tag>
+         <tag>ITIL</tag>
+      </fr>
+   </tags>
+   <screenshots>
+      <screenshot>https://raw.githubusercontent.com/CodeByPinar/glpi-surge/main/docs/screenshots/surge-detail.png</screenshot>
+      <screenshot>https://raw.githubusercontent.com/CodeByPinar/glpi-surge/main/docs/screenshots/surge-major-incident.png</screenshot>
+      <screenshot>https://raw.githubusercontent.com/CodeByPinar/glpi-surge/main/docs/screenshots/stats.png</screenshot>
+      <screenshot>https://raw.githubusercontent.com/CodeByPinar/glpi-surge/main/docs/screenshots/portal-notice.png</screenshot>
+   </screenshots>
+</root>

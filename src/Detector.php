@@ -43,6 +43,11 @@ final class Detector
         }
         foreach ($created as $sid) {
             Notifier::send('detected', $sid);
+            try {
+                Mailer::surgeDetected($sid); // fixed recipients + whoever is on call
+            } catch (\Throwable $e) {
+                \Toolbox::logInFile('surge', sprintf("Mail for surge #%d: %s\n", $sid, $e->getMessage()));
+            }
         }
         return ['created' => $created, 'grown' => $grown];
     }
@@ -134,23 +139,32 @@ final class Detector
         // live surges of this rule + their member texts (for one shared IDF)
         $live = Surge::live((int) $rule['id']);
         $docs = [];
+        $texts = [];
         foreach ($cand as $id => $t) {
             $docs[$id] = Text::terms((string) $t['name'], (string) $t['content']);
+            $texts[$id] = $t;
         }
         $members = [];
         foreach ($live as $s) {
             foreach (Surge::memberTexts((int) $s['id'], 30) as $mid => $m) {
                 $members[(int) $s['id']][] = $mid;
                 $docs[$mid] ??= Text::terms((string) $m['name'], (string) $m['content']);
+                $texts[$mid] ??= $m;
             }
         }
         $vec = Text::vectors($docs, self::background($rule));
+        // optional semantic similarity: (1 − w) · TF-IDF + w · embedding cosine
+        $emb = Embeddings::enabled() ? Embeddings::vectors($texts) : [];
+        $w = Embeddings::weight();
+        $mix = static fn(float $tfidf, ?float $e): float => $e === null ? $tfidf : (1 - $w) * $tfidf + $w * $e;
+        $sim = static fn(int $a, int $b): float => $mix(Text::cosine($vec[$a], $vec[$b]), isset($emb[$a], $emb[$b]) ? Embeddings::cosine($emb[$a], $emb[$b]) : null);
 
         // 1. join live surges
         $grown = [];
         foreach ($live as $s) {
             $sid = (int) $s['id'];
             $cent = Text::centroid(array_map(static fn($m) => $vec[$m], $members[$sid] ?? []));
+            $ecent = $emb ? Embeddings::centroid(array_values(array_intersect_key($emb, array_flip($members[$sid] ?? [])))) : [];
             foreach ($cand as $id => $t) {
                 if ($rule['match_category'] && (int) $t['itilcategories_id'] !== (int) $s['itilcategories_id']) {
                     continue;
@@ -158,7 +172,7 @@ final class Detector
                 if ($rule['match_location'] && (int) $t['locations_id'] !== (int) $s['locations_id']) {
                     continue;
                 }
-                $score = $cent ? Text::cosine($vec[$id], $cent) : 1.0;
+                $score = $cent ? $mix(Text::cosine($vec[$id], $cent), $ecent && isset($emb[$id]) ? Embeddings::cosine($emb[$id], $ecent) : null) : 1.0;
                 if ($score >= $min) {
                     Surge::addTicket($sid, $id, $score);
                     $grown[$sid] = ($grown[$sid] ?? 0) + 1;
@@ -177,12 +191,19 @@ final class Detector
             if (count($g) < (int) $rule['min_tickets']) {
                 continue;
             }
-            $clusters = $rule['match_title'] ? Text::cluster($g, $min) : [array_keys($g)];
+            $clusters = $rule['match_title'] ? Text::cluster($g, $min, $sim) : [array_keys($g)];
             foreach ($clusters as $ids) {
                 if (count($ids) < (int) $rule['min_tickets']) {
                     continue;
                 }
-                $created[] = Surge::create($rule, array_intersect_key($cand, array_flip($ids)), array_intersect_key($vec, array_flip($ids)));
+                $v = array_intersect_key($vec, array_flip($ids));
+                $c = Text::centroid(array_values($v));
+                $ec = $emb ? Embeddings::centroid(array_values(array_intersect_key($emb, array_flip($ids)))) : [];
+                $scores = [];
+                foreach ($ids as $id) {
+                    $scores[$id] = $mix(Text::cosine($vec[$id], $c), $ec && isset($emb[$id]) ? Embeddings::cosine($emb[$id], $ec) : null);
+                }
+                $created[] = Surge::create($rule, array_intersect_key($cand, array_flip($ids)), $v, $scores);
             }
         }
         return ['created' => $created, 'grown' => $grown];

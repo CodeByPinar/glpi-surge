@@ -10,6 +10,7 @@ require __DIR__ . ($env === 'g12' ? '/g12_boot.php' : '/iq_boot.php');
 iq_login(2);
 Session::changeActiveEntities('all');
 
+use GlpiPlugin\Surge\OnCall;
 use GlpiPlugin\Surge\Rule;
 use GlpiPlugin\Surge\Surge;
 
@@ -37,6 +38,9 @@ $clean = static function () use ($DB, $store): void {
     foreach ($DB->request(['SELECT' => 'id', 'FROM' => 'glpi_users', 'WHERE' => ['name' => ['LIKE', 'surgedemo.%']]]) as $r) {
         (new User())->delete(['id' => $r['id']], true);
     }
+    // 0.2.0: synthetic history (statistics) and on-call slots
+    $DB->delete(Surge::TABLE, ['keywords' => '["surge-demo-history"]']);
+    $DB->delete(OnCall::TABLE, ['comment' => ['LIKE', 'surge-demo%']]);
 };
 $clean();
 if (($argv[2] ?? 'create') === 'clean') {
@@ -99,6 +103,39 @@ foreach ($made as $id => $ago) {
 }
 foreach (array_unique(array_column(iterator_to_array($DB->request(['SELECT' => 'surges_id', 'FROM' => Surge::ITEMS, 'WHERE' => ['tickets_id' => array_keys($made)]])), 'surges_id')) as $sid) {
     Surge::refresh((int) $sid);
-    echo "surge #$sid: " . Surge::get((int) $sid)['name'] . ' — ' . Surge::get((int) $sid)['ticket_count'] . " tickets\n";
+    // detection happened when the 5th ticket arrived
+    $dates = array_column(iterator_to_array($DB->request(['SELECT' => 't.date', 'FROM' => Surge::ITEMS . ' AS i', 'INNER JOIN' => ['glpi_tickets AS t' => ['ON' => ['i' => 'tickets_id', 't' => 'id']]],
+        'WHERE' => ['i.surges_id' => $sid], 'ORDER' => 't.date'])), 'date');
+    $DB->update(Surge::TABLE, ['date_creation' => $dates[min(4, count($dates) - 1)]], ['id' => $sid]);
+    $s = Surge::get((int) $sid);
+    echo "surge #$sid: " . $s['name'] . ' — ' . $s['ticket_count'] . " tickets\n";
+    if ((int) $s['locations_id'] === $floor) {
+        // the network outage is being handled: master ticket, broadcast, notice on the portal
+        Surge::createMaster((int) $sid, '[Major incident] Network outage on floor 3');
+        Surge::broadcast((int) $sid, '<p>We are aware of the network outage on floor 3. A switch is being replaced; next update at 10:30.</p>');
+        Surge::publishNotice((int) $sid, "Network outage on floor 3: we are aware of it and a switch is being replaced. No need to open a new ticket — next update at 10:30.");
+    }
 }
+
+// synthetic history for the statistics page (no tickets behind them)
+mt_srand(42);
+$cats = [$mail, $mail, $net, $net, $net, 0, $mail];
+for ($k = 0; $k < 16; $k++) {
+    $first = time() - mt_rand(3, 84) * 86400 - mt_rand(8, 17) * 3600;
+    $count = mt_rand(5, 24);
+    $status = $k === 3 || $k === 11 ? Surge::DISMISSED : Surge::RESOLVED;
+    $DB->insert(Surge::TABLE, [
+        'rules_id' => 1, 'entities_id' => 0, 'name' => 'History', 'status' => $status, 'itilcategories_id' => $cats[$k % count($cats)],
+        'locations_id' => $k % 3 === 0 ? $floor : 0, 'keywords' => '["surge-demo-history"]', 'ticket_count' => $count,
+        'date_first' => date('Y-m-d H:i:s', $first), 'date_last' => date('Y-m-d H:i:s', $first + mt_rand(10, 50) * 60),
+        'date_creation' => date('Y-m-d H:i:s', $first + mt_rand(2, 9) * 60),
+        'date_resolved' => $status === Surge::RESOLVED ? date('Y-m-d H:i:s', $first + mt_rand(30, 300) * 60) : null,
+        'problems_id' => 0, 'tickets_id_master' => 0, 'is_public' => 0,
+    ]);
+}
+
+// on-call rota
+OnCall::save(0, ['users_id' => $users[1], 'days' => [64, 1, 2, 4, 8], 'time_start' => '18:00', 'time_end' => '08:00', 'is_active' => 1, 'comment' => 'surge-demo · weeknights (Sun–Thu)']);
+OnCall::save(0, ['users_id' => $users[2], 'days' => [32, 64], 'time_start' => '00:00', 'time_end' => '24:00', 'is_active' => 1, 'comment' => 'surge-demo · weekends']);
+OnCall::save(0, ['users_id' => $users[3], 'days' => [1, 2, 4, 8, 16], 'time_start' => '08:00', 'time_end' => '18:00', 'is_active' => 1, 'comment' => 'surge-demo · office hours']);
 echo count($made) . " demo tickets, rules active: " . count(Rule::all(true)) . "\n";

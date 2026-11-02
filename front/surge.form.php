@@ -9,6 +9,7 @@
  * resolve all, dismiss / reopen, remove a ticket).
  */
 
+use GlpiPlugin\Surge\Config;
 use GlpiPlugin\Surge\Profile;
 use GlpiPlugin\Surge\Rule;
 use GlpiPlugin\Surge\Surge;
@@ -54,6 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 [$n, $skip] = Surge::resolveAll($id, $html);
                 Session::addMessageAfterRedirect(sprintf(__('%d ticket(s) solved.', 'surge'), $n) . ($skip ? ' ' . sprintf(__('%d ticket(s) skipped (no right).', 'surge'), $skip) : ''), false, INFO);
+                break;
+            case 'publish':
+                Surge::publishNotice($id, (string) ($_POST['text'] ?? ''));
+                Session::addMessageAfterRedirect(__('Notice published on the self-service portal.', 'surge'), false, INFO);
+                break;
+            case 'unpublish':
+                Surge::unpublishNotice($id);
                 break;
             case 'dismiss':
                 Surge::setStatus($id, Surge::DISMISSED);
@@ -164,6 +172,24 @@ if (!$manage && !(int) $s['tickets_id_master'] && !(int) $s['problems_id']) {
     echo "<p class='text-muted mb-0'>—</p>";
 }
 echo "</div></div>";
+// public notice for end users
+if ($manage && ($open || $s['is_public'])) {
+    $pub = (int) $s['is_public'] === 1;
+    echo "<div class='card mb-3'><div class='card-header'><h3 class='card-title'><i class='ti ti-world me-1'></i>" . Ui::e(__('Notice for end users', 'surge')) . "</h3>"
+        . ($pub ? "<span class='badge bg-green-lt ms-auto'>" . Ui::e(__('Published', 'surge')) . "</span>" : '') . "</div><div class='card-body'>"
+        . "<p class='small text-muted'>" . Ui::e(__('Shown at the top of the self-service portal for users of the same entities, so they do not open the same ticket again. Ticket details are never shown.', 'surge')) . "</p>";
+    if ($open) {
+        echo $form('publish', "<textarea class='form-control mb-2' name='text' rows='3'>" . Ui::e($pub ? $s['public_message'] : Surge::defaultNotice($s)) . "</textarea>"
+            . "<button class='btn btn-outline-primary w-100'><i class='ti ti-world-upload'></i> " . Ui::e($pub ? __('Update notice', 'surge') : __('Publish notice', 'surge')) . "</button>", 'mb-2');
+    }
+    if ($pub) {
+        echo $form('unpublish', "<button class='btn btn-ghost-secondary w-100'><i class='ti ti-world-off'></i> " . Ui::e(__('Withdraw notice', 'surge')) . "</button>");
+        if (!$open) {
+            echo "<div class='form-text'>" . Ui::e(sprintf(__('Shown as "resolved" for %d hour(s) after resolution.', 'surge'), Config::int('notice_resolved_hours'))) . "</div>";
+        }
+    }
+    echo "</div></div>";
+}
 if ($manage && $open) {
     echo "<div class='card mb-3'><div class='card-header'><h3 class='card-title'><i class='ti ti-speakerphone me-1'></i>" . Ui::e(__('Tell everyone', 'surge')) . "</h3></div><div class='card-body'>"
         . $form('broadcast', "<textarea class='form-control mb-2' name='text' rows='3' placeholder='" . Ui::e(__('e.g. We are aware of the mail outage and working on it. Next update at 10:30.', 'surge')) . "'></textarea>"

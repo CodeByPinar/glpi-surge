@@ -151,7 +151,8 @@ def main():
     found = extract()
     entries = dict(sorted(found.items(), key=lambda kv: kv[1][1][0]))
     write_po(os.path.join(LOC, DOMAIN + '.pot'), '', entries, {}, '', 'nplurals=2; plural=(n != 1);')
-    langs = {'tr_TR': 'nplurals=2; plural=(n > 1);', 'en_GB': 'nplurals=2; plural=(n != 1);'}
+    langs = {'tr_TR': 'nplurals=2; plural=(n > 1);', 'en_GB': 'nplurals=2; plural=(n != 1);', 'fr_FR': 'nplurals=2; plural=(n > 1);',
+             'de_DE': 'nplurals=2; plural=(n != 1);', 'es_ES': 'nplurals=2; plural=(n != 1);', 'pt_BR': 'nplurals=2; plural=(n > 1);'}
     for f in os.listdir(LOC):
         if f.endswith('.po'):
             langs.setdefault(f[:-3], 'nplurals=2; plural=(n != 1);')
@@ -162,7 +163,11 @@ def main():
         js = os.path.join(ROOT, 'tools', lang + '.json')
         if os.path.exists(js):
             import json
+            ph = re.compile(r'%(?:\d\$)?[-+ 0#]*\d*(?:\.\d+)?[dsf%]')
             for mid, tr in json.load(open(js, encoding='utf-8')).items():
+                for t in (tr if isinstance(tr, list) else [tr]):
+                    if sorted(ph.findall(mid)) != sorted(ph.findall(t)) and not (isinstance(tr, list) and t is tr[0]):
+                        print(f'  ! {lang}: placeholders differ: {mid!r} -> {t!r}')
                 if mid in entries and not any(old.get(mid, (None, []))[1]):
                     old[mid] = (entries[mid][0], tr if isinstance(tr, list) else [tr])
         write_po(po, lang, entries, old, header, plural)

@@ -7,7 +7,7 @@ import tarfile
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INCLUDE = ['setup.php', 'hook.php', 'LICENSE', 'README.md', 'CHANGELOG.md', 'src', 'front', 'public', 'locales']
+INCLUDE = ['setup.php', 'hook.php', 'plugin.xml', 'LICENSE', 'README.md', 'CHANGELOG.md', 'src', 'front', 'public', 'locales']
 version = re.search(r"PLUGIN_SURGE_VERSION',\s*'([^']+)'", open(os.path.join(ROOT, 'setup.php'), encoding='utf-8').read()).group(1)
 
 files = []
