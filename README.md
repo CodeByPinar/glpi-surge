@@ -19,12 +19,12 @@
   <a href="#-why-surge">Why</a> ·
   <a href="#-features">Features</a> ·
   <a href="#-screenshots">Screenshots</a> ·
-  <a href="#-how-it-works">How it works</a> ·
+  <a href="#%EF%B8%8F-how-it-works">How it works</a> ·
   <a href="#-installation">Installation</a> ·
   <a href="#-quick-start">Quick start</a> ·
   <a href="#%EF%B8%8F-configuration">Configuration</a> ·
   <a href="#-faq">FAQ</a> ·
-  <a href="#-roadmap">Roadmap</a>
+  <a href="#%EF%B8%8F-roadmap">Roadmap</a>
 </p>
 
 ---
