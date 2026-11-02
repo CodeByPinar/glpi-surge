@@ -1,0 +1,12 @@
+.git
+.github
+.gitattributes
+.gitignore
+.dockerignore
+Dockerfile
+docker
+dist
+docs
+tests
+tools
+*.log

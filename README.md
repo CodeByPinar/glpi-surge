@@ -224,6 +224,33 @@ sudo -u www-data php /var/www/glpi/bin/console plugin:activate surge
 
 …or open **Setup → Plugins** and click **Install**, then **Enable**.
 
+### Try it with Docker
+
+Every release publishes GLPI images with Surge preinstalled to the
+[GitHub Container Registry](https://github.com/CodeByPinar/glpi-surge/pkgs/container/glpi-surge). They are built on the
+[official GLPI image](https://github.com/glpi-project/docker-images).
+
+| Image | GLPI |
+|---|---|
+| `ghcr.io/codebypinar/glpi-surge:glpi11` · `:<version>-glpi11` · `:latest` | 11.0 |
+| `ghcr.io/codebypinar/glpi-surge:glpi12` · `:<version>-glpi12` | 12.0 |
+
+```bash
+curl -O https://raw.githubusercontent.com/CodeByPinar/glpi-surge/main/docker/docker-compose.yml
+docker compose up -d          # GLPI installs itself on first start (about a minute)
+```
+
+Open <http://localhost:8080>, sign in with `glpi` / `glpi`, then enable the plugin once:
+
+```bash
+docker compose exec -u www-data glpi php /var/www/glpi/bin/console glpi:plugin:install surge -u glpi
+docker compose exec -u www-data glpi php /var/www/glpi/bin/console glpi:plugin:activate surge
+# GLPI 12 image: use plugin:install / plugin:activate
+```
+
+> [!WARNING]
+> This setup is for evaluation only: change the default passwords before exposing it anywhere.
+
 ### From source
 
 ```bash
@@ -429,7 +456,8 @@ tests/                   integration tests and demo data for a GLPI test instanc
   test instance.
 - **Translations.** `python tools/i18n.py` extracts strings to `locales/surge.pot`, merges translations from
   `tools/<lang>.json` and compiles the `.mo` files. No gettext tools are needed.
-- **Release.** `python tools/package.py` writes `dist/surge-<version>.tgz`, `.zip` and `.sha256`.
+- **Release.** Bump `PLUGIN_SURGE_VERSION` and the changelog, then push a tag `vX.Y.Z`. GitHub Actions builds the
+  archives (`tools/package.py`), publishes the GitHub Release and pushes the GLPI 11 / 12 Docker images to GHCR.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes and add a language.
 
