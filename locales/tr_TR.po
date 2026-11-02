@@ -119,6 +119,10 @@ msgstr "Örnek veriler geçerli birime yüklensin mi?"
 msgid "Load demo data"
 msgstr "Örnek verileri yükle"
 
+#: front/config.php:143
+msgid "Questions, bug reports or commercial support: %s"
+msgstr "Soru, hata bildirimi ya da ücretli destek: %s"
+
 #: front/config.php:24
 msgid "Demo data loaded: %1$d tickets, %2$d surges. Open Surges to see them."
 msgstr "Örnek veriler yüklendi: %1$d kayıt, %2$d toplu olay. Görmek için Toplu olaylar'ı açın."

@@ -240,5 +240,6 @@
   "Remove demo data": "Örnek verileri kaldır",
   "Creates two outages (mail, floor-3 network) among everyday tickets, a master ticket and a portal notice, past surges for the statistics and an on-call rota: 20 tickets, 8 users without password, 2 categories and 1 location in the current entity. Everything is removed with one click. For test and demo environments.": "Gündelik kayıtların arasında iki kesinti (e-posta, 3. kat ağ), bir ana kayıt ve portal duyurusu, istatistikler için geçmiş toplu olaylar ve bir nöbet çizelgesi oluşturur: geçerli birimde 20 kayıt, parolasız 8 kullanıcı, 2 kategori ve 1 konum. Hepsi tek tıkla kaldırılır. Test ve tanıtım ortamları içindir.",
   "Load the demo data into the current entity?": "Örnek veriler geçerli birime yüklensin mi?",
-  "Load demo data": "Örnek verileri yükle"
+  "Load demo data": "Örnek verileri yükle",
+  "Questions, bug reports or commercial support: %s": "Soru, hata bildirimi ya da ücretli destek: %s"
 }

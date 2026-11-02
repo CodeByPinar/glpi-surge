@@ -137,4 +137,8 @@ if (Demo::loaded()) {
         . "<button class='btn btn-outline-primary' name='demo' value='load' onclick=\"return confirm(" . Ui::e(json_encode(__('Load the demo data into the current entity?', 'surge'))) . ")\"><i class='ti ti-flask'></i> " . Ui::e(__('Load demo data', 'surge')) . "</button>";
 }
 echo "</form></div></div>";
+
+// contact
+$mail = "<a href='mailto:" . Ui::e(PLUGIN_SURGE_CONTACT) . "'>" . Ui::e(PLUGIN_SURGE_CONTACT) . "</a>";
+echo "<p class='text-muted small mt-4 mb-0'><i class='ti ti-mail me-1'></i>" . sprintf(Ui::e(__('Questions, bug reports or commercial support: %s', 'surge')), $mail) . "</p>";
 Ui::footer();

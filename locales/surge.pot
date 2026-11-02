@@ -119,6 +119,10 @@ msgstr ""
 msgid "Load demo data"
 msgstr ""
 
+#: front/config.php:143
+msgid "Questions, bug reports or commercial support: %s"
+msgstr ""
+
 #: front/config.php:24
 msgid "Demo data loaded: %1$d tickets, %2$d surges. Open Surges to see them."
 msgstr ""

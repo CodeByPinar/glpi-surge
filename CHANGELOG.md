@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.2] — 2026-11-02
+
+- Contact address for questions, private bug reports and commercial support: info@itsmplugins.com (Settings page and README).
+
 ## [0.3.1] — 2026-11-02
 
 - **Demo data** (Settings): load two sample outages with a master ticket, a portal notice, past surges and an on-call

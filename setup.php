@@ -21,7 +21,9 @@ use GlpiPlugin\Surge\Menu;
 use GlpiPlugin\Surge\Profile;
 use GlpiPlugin\Surge\TicketHooks;
 
-define('PLUGIN_SURGE_VERSION', '0.3.1');
+define('PLUGIN_SURGE_VERSION', '0.3.2');
+/** Contact for questions, private bug reports and commercial support. */
+define('PLUGIN_SURGE_CONTACT', 'info@itsmplugins.com');
 define('PLUGIN_SURGE_MIN_GLPI', '11.0.0');
 define('PLUGIN_SURGE_MAX_GLPI', '12.99.99');
 

@@ -541,6 +541,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes and add a lang
 
 ---
 
+## 📬 Contact
+
+Questions, bug reports you would rather not post publicly, or commercial support (installation, custom rules, integration): **[info@itsmplugins.com](mailto:info@itsmplugins.com)**. Bugs and ideas are also welcome as [GitHub issues](https://github.com/CodeByPinar/glpi-surge/issues).
+
+---
+
 ## 📄 License
 
 Surge is free software, released under the [GNU General Public License v3.0 or later](LICENSE).
