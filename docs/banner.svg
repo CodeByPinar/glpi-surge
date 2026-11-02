@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="Surge — major incident detection for GLPI">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#151b2e"/>
+      <stop offset="1" stop-color="#26193a"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb347"/>
+      <stop offset="1" stop-color="#e8590c"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#e8590c" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="320" rx="24" fill="url(#bg)"/>
+  <!-- arrival bars: quiet, then a burst -->
+  <g fill="url(#bar)" opacity=".9">
+    <rect x="760" y="228" width="22" height="20" rx="4"/>
+    <rect x="796" y="222" width="22" height="26" rx="4"/>
+    <rect x="832" y="230" width="22" height="18" rx="4"/>
+    <rect x="868" y="214" width="22" height="34" rx="4"/>
+    <rect x="904" y="160" width="22" height="88" rx="4"/>
+    <rect x="940" y="104" width="22" height="144" rx="4"/>
+    <rect x="976" y="72" width="22" height="176" rx="4"/>
+    <rect x="1012" y="92" width="22" height="156" rx="4"/>
+    <rect x="1048" y="130" width="22" height="118" rx="4"/>
+    <rect x="1084" y="178" width="22" height="70" rx="4"/>
+    <rect x="1120" y="212" width="22" height="36" rx="4"/>
+    <rect x="1156" y="226" width="22" height="22" rx="4"/>
+  </g>
+  <line x1="740" y1="256" x2="1200" y2="256" stroke="#ffffff" stroke-opacity=".18" stroke-width="2"/>
+  <rect x="890" y="56" width="236" height="208" rx="14" fill="none" stroke="#ffb347" stroke-opacity=".7" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <text x="1008" y="46" text-anchor="middle" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#ffb347">1 surge · 10 tickets · 29 min</text>
+  <!-- logo -->
+  <g transform="translate(84 92)">
+    <rect width="120" height="120" rx="30" fill="#ffffff" fill-opacity=".07"/>
+    <path d="M70 12 L30 68 L56 68 L46 108 L90 46 L63 46 Z" fill="url(#bolt)"/>
+  </g>
+  <text x="236" y="168" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#ffffff" letter-spacing="-1">Surge</text>
+  <text x="240" y="212" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="25" fill="#c9cfdc">Major incident detection for GLPI</text>
+  <text x="240" y="246" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="18" fill="#8d96ab">Many similar tickets → one incident → one fix</text>
+</svg>
