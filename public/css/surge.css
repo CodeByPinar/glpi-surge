@@ -1,0 +1,19 @@
+/* Surge — major incident detection for GLPI · © 2026 Pınar Topuz · GPL-3.0-or-later */
+
+.surge.container-fluid { padding-bottom: 2.5rem; }
+.surge-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1rem; margin-bottom: .75rem; }
+.surge-head h2 { margin: 0; }
+.surge-head h2 .ti { color: #e8590c; }
+.surge-nav .nav-link { border-radius: 10px; }
+.surge-nav .nav-link .ti { margin-right: 2px; }
+
+.surge-spark rect { fill: #e8590c; opacity: .85; }
+.surge-row-resolved .surge-spark rect, .surge-row-dismissed .surge-spark rect { fill: var(--tblr-secondary, #6b7280); opacity: .5; }
+.surge-list td:first-child a { color: inherit; }
+
+/* banner on the ticket's right panel */
+.surge-banner { display: flex; gap: .6rem; align-items: flex-start; margin: 0 0 .5rem; padding: .6rem .75rem; border-radius: 8px; font-size: .85rem; line-height: 1.4;
+    border: 1px solid color-mix(in srgb, #e8590c 35%, transparent); background: color-mix(in srgb, #e8590c 9%, var(--tblr-bg-surface, #fff)); }
+.surge-banner > .ti { font-size: 1.3rem; color: #e8590c; margin-top: 1px; }
+.surge-banner.surge-resolved, .surge-banner.surge-dismissed { border-color: var(--tblr-border-color, #e3e7ee); background: var(--tblr-bg-surface-secondary, #f6f8fb); }
+.surge-banner.surge-resolved > .ti, .surge-banner.surge-dismissed > .ti { color: var(--tblr-secondary, #6b7280); }

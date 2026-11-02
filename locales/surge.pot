@@ -1,0 +1,584 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Surge\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: front/config.php:20
+msgid "Settings saved."
+msgstr ""
+
+#: front/config.php:24 src/Ui.php:53
+msgid "Settings"
+msgstr ""
+
+#: front/config.php:34
+msgid "Very high"
+msgstr ""
+
+#: front/config.php:34
+msgid "High"
+msgstr ""
+
+#: front/config.php:34
+msgid "Medium"
+msgstr ""
+
+#: front/config.php:34
+msgid "Low"
+msgstr ""
+
+#: front/config.php:34
+msgid "Very low"
+msgstr ""
+
+#: front/config.php:37
+msgid "Handling"
+msgstr ""
+
+#: front/config.php:38
+msgid "Master ticket urgency"
+msgstr ""
+
+#: front/config.php:39
+msgid "Master ticket impact"
+msgstr ""
+
+#: front/config.php:40
+msgid "Solving the master ticket solves every linked ticket"
+msgstr ""
+
+#: front/config.php:40
+msgid "The same solution text is added to each open ticket of the surge; GLPI notifies the requesters as usual."
+msgstr ""
+
+#: front/config.php:41
+msgid "Link late tickets to the master automatically"
+msgstr ""
+
+#: front/config.php:41
+msgid "Tickets that join a surge after its master ticket was created become its children too."
+msgstr ""
+
+#: front/config.php:42
+msgid "A surge keeps collecting tickets for (hours after its last ticket)"
+msgstr ""
+
+#: front/config.php:46
+msgid "Webhook"
+msgstr ""
+
+#: front/config.php:47
+msgid "URL"
+msgstr ""
+
+#: front/config.php:48
+msgid "Format"
+msgstr ""
+
+#: front/config.php:48
+msgid "Generic JSON"
+msgstr ""
+
+#: front/config.php:49
+msgid "Sent when a surge is detected, gets a master ticket and is resolved. GLPI proxy settings are used. Leave empty to disable."
+msgstr ""
+
+#: front/config.php:50
+msgid "Example payload"
+msgstr ""
+
+#: front/config.php:56 front/rules.php:87
+msgid "Save"
+msgstr ""
+
+#: front/rules.php:102
+msgid "Test on current tickets"
+msgstr ""
+
+#: front/rules.php:103
+msgid "%1$d open ticket(s) in the last %2$d minutes that are not in a surge yet"
+msgstr ""
+
+#: front/rules.php:114
+msgid "would become a surge"
+msgstr ""
+
+#: front/rules.php:114
+msgid "similar, below the threshold"
+msgstr ""
+
+#: front/rules.php:122
+msgid "No similar tickets in the window right now."
+msgstr ""
+
+#: front/rules.php:26
+msgid "Rule deleted."
+msgstr ""
+
+#: front/rules.php:30
+msgid "Rule saved."
+msgstr ""
+
+#: front/rules.php:34 src/Ui.php:52
+msgid "Detection rules"
+msgstr ""
+
+#: front/rules.php:38
+msgid "New rule"
+msgstr ""
+
+#: front/rules.php:39 front/rules.php:62
+msgid "Rule"
+msgstr ""
+
+#: front/rules.php:39 front/rules.php:71
+msgid "Condition"
+msgstr ""
+
+#: front/rules.php:40 front/rules.php:65
+msgid "Entity"
+msgstr ""
+
+#: front/rules.php:40 front/rules.php:64
+msgid "Active"
+msgstr ""
+
+#: front/rules.php:45
+msgid "(and sub-entities)"
+msgstr ""
+
+#: front/rules.php:63
+msgid "Name"
+msgstr ""
+
+#: front/rules.php:67
+msgid "Include sub-entities"
+msgstr ""
+
+#: front/rules.php:68
+msgid "Comment"
+msgstr ""
+
+#: front/rules.php:72
+msgid "At least (tickets)"
+msgstr ""
+
+#: front/rules.php:73
+msgid "Within (minutes)"
+msgstr ""
+
+#: front/rules.php:74
+msgid "Same category"
+msgstr ""
+
+#: front/rules.php:74
+msgid "Tickets without a category are grouped together."
+msgstr ""
+
+#: front/rules.php:75
+msgid "Same location"
+msgstr ""
+
+#: front/rules.php:76
+msgid "Similar title / description"
+msgstr ""
+
+#: front/rules.php:76
+msgid "Turn off to group by category / location only (e.g. \"any 10 tickets about the VPN in 15 minutes\")."
+msgstr ""
+
+#: front/rules.php:77
+msgid "Text similarity threshold"
+msgstr ""
+
+#: front/rules.php:78
+msgid "0.25 loose · 0.35 balanced · 0.5 strict. Use \"Save and test\" to tune it on the current tickets."
+msgstr ""
+
+#: front/rules.php:79
+msgid "Ticket type"
+msgstr ""
+
+#: front/rules.php:80
+msgid "Any"
+msgstr ""
+
+#: front/rules.php:80
+msgid "Incidents only"
+msgstr ""
+
+#: front/rules.php:80
+msgid "Requests only"
+msgstr ""
+
+#: front/rules.php:83
+msgid "Only these categories"
+msgstr ""
+
+#: front/rules.php:83
+msgid "empty = all"
+msgstr ""
+
+#: front/rules.php:88
+msgid "Save and test"
+msgstr ""
+
+#: front/rules.php:89
+msgid "Back"
+msgstr ""
+
+#: front/rules.php:91
+msgid "Delete this rule? Surges it found are kept."
+msgstr ""
+
+#: front/rules.php:91
+msgid "Delete"
+msgstr ""
+
+#: front/surge.form.php:105 front/surge.form.php:130 front/surge.php:70
+msgid "Tickets"
+msgstr ""
+
+#: front/surge.form.php:106
+msgid "Time span"
+msgstr ""
+
+#: front/surge.form.php:106
+msgid "%d min"
+msgstr ""
+
+#: front/surge.form.php:107 front/surge.php:71
+msgid "Category / location"
+msgstr ""
+
+#: front/surge.form.php:108
+msgid "Detected by"
+msgstr ""
+
+#: front/surge.form.php:113 front/surge.php:71
+msgid "Arrivals"
+msgstr ""
+
+#: front/surge.form.php:116
+msgid "Common words"
+msgstr ""
+
+#: front/surge.form.php:131
+msgid "Ticket"
+msgstr ""
+
+#: front/surge.form.php:131
+msgid "Requester"
+msgstr ""
+
+#: front/surge.form.php:131
+msgid "Opened"
+msgstr ""
+
+#: front/surge.form.php:131 front/surge.php:70
+msgid "Status"
+msgstr ""
+
+#: front/surge.form.php:132
+msgid "Text similarity to the surge"
+msgstr ""
+
+#: front/surge.form.php:132
+msgid "Match"
+msgstr ""
+
+#: front/surge.form.php:142
+msgid "Not part of this incident"
+msgstr ""
+
+#: front/surge.form.php:150
+msgid "Major incident"
+msgstr ""
+
+#: front/surge.form.php:152
+msgid "Master ticket"
+msgstr ""
+
+#: front/surge.form.php:154
+msgid "Master ticket title"
+msgstr ""
+
+#: front/surge.form.php:154 src/Surge.php:330
+msgid "[Major incident] %s"
+msgstr ""
+
+#: front/surge.form.php:155
+msgid "Create master ticket and link all"
+msgstr ""
+
+#: front/surge.form.php:156
+msgid "Every ticket of the surge becomes a child of the master. New tickets joining the surge are linked automatically."
+msgstr ""
+
+#: front/surge.form.php:161
+msgid "Create a problem and link all"
+msgstr ""
+
+#: front/surge.form.php:168
+msgid "Tell everyone"
+msgstr ""
+
+#: front/surge.form.php:169
+msgid "e.g. We are aware of the mail outage and working on it. Next update at 10:30."
+msgstr ""
+
+#: front/surge.form.php:170
+msgid "Add as public follow-up to all open tickets"
+msgstr ""
+
+#: front/surge.form.php:172
+msgid "Resolve"
+msgstr ""
+
+#: front/surge.form.php:173
+msgid "e.g. The mail server was restarted at 10:12; mail works again."
+msgstr ""
+
+#: front/surge.form.php:174
+msgid "Solve every open ticket of this surge with this solution?"
+msgstr ""
+
+#: front/surge.form.php:174
+msgid "Solve all tickets"
+msgstr ""
+
+#: front/surge.form.php:175
+msgid "Solving the master ticket in GLPI does the same automatically."
+msgstr ""
+
+#: front/surge.form.php:179
+msgid "Acknowledged by %1$s on %2$s"
+msgstr ""
+
+#: front/surge.form.php:38
+msgid "Master ticket #%d created and linked."
+msgstr ""
+
+#: front/surge.form.php:42
+msgid "Problem %d created and linked."
+msgstr ""
+
+#: front/surge.form.php:46
+msgid "Write the message first."
+msgstr ""
+
+#: front/surge.form.php:49
+msgid "Follow-up added to %d ticket(s)."
+msgstr ""
+
+#: front/surge.form.php:49 front/surge.form.php:56
+msgid "%d ticket(s) skipped (no right)."
+msgstr ""
+
+#: front/surge.form.php:53
+msgid "Write the solution first."
+msgstr ""
+
+#: front/surge.form.php:56
+msgid "%d ticket(s) solved."
+msgstr ""
+
+#: front/surge.form.php:90
+msgid "Acknowledge"
+msgstr ""
+
+#: front/surge.form.php:93
+msgid "Not a real incident? The tickets stay as they are."
+msgstr ""
+
+#: front/surge.form.php:93
+msgid "Dismiss"
+msgstr ""
+
+#: front/surge.form.php:94
+msgid "Reopen"
+msgstr ""
+
+#: front/surge.php:24
+msgid "Detection finished: %1$d new surge(s), %2$d ticket(s) added to existing ones."
+msgstr ""
+
+#: front/surge.php:38 src/Ui.php:50
+msgid "Surges"
+msgstr ""
+
+#: front/surge.php:45
+msgid "Open"
+msgstr ""
+
+#: front/surge.php:49
+msgid "All"
+msgstr ""
+
+#: front/surge.php:56
+msgid "Run detection now"
+msgstr ""
+
+#: front/surge.php:64
+msgid "No surge here. All quiet."
+msgstr ""
+
+#: front/surge.php:65
+msgid "%d active detection rule."
+msgid_plural "%d active detection rules."
+msgstr[0] ""
+msgstr[1] ""
+
+#: front/surge.php:70 src/Surge.php:41
+msgid "Surge"
+msgid_plural "Surges"
+msgstr[0] ""
+msgstr[1] ""
+
+#: front/surge.php:71
+msgid "First / last ticket"
+msgstr ""
+
+#: front/surge.php:72
+msgid "Master ticket / problem"
+msgstr ""
+
+#: hook.php:87 front/rules.php:57
+msgid "Same category, similar text"
+msgstr ""
+
+#: hook.php:88
+msgid "Default rule: 5 or more open tickets in 30 minutes, same category, similar title or description."
+msgstr ""
+
+#: src/Notifier.php:36
+msgid "Surge detected"
+msgstr ""
+
+#: src/Notifier.php:37
+msgid "Major incident opened"
+msgstr ""
+
+#: src/Notifier.php:38
+msgid "Surge resolved"
+msgstr ""
+
+#: src/Profile.php:55
+msgid "See surges"
+msgstr ""
+
+#: src/Profile.php:56
+msgid "Handle surges (master ticket, problem, broadcast, resolve)"
+msgstr ""
+
+#: src/Profile.php:57
+msgid "Detection rules and settings"
+msgstr ""
+
+#: src/Rule.php:102
+msgid "≥ %1$d tickets in %2$d min"
+msgstr ""
+
+#: src/Rule.php:104
+msgid "same category"
+msgstr ""
+
+#: src/Rule.php:107
+msgid "same location"
+msgstr ""
+
+#: src/Rule.php:110
+msgid "similar text (%d %%)"
+msgstr ""
+
+#: src/Rule.php:113
+msgid "incidents only"
+msgstr ""
+
+#: src/Rule.php:115
+msgid "requests only"
+msgstr ""
+
+#: src/Rule.php:63
+msgid "Unnamed rule"
+msgstr ""
+
+#: src/Surge.php:318 src/Surge.php:365
+msgid "Surge not found."
+msgstr ""
+
+#: src/Surge.php:324
+msgid "You are not allowed to create tickets."
+msgstr ""
+
+#: src/Surge.php:332
+msgid "Major incident opened by Surge from %1$d similar tickets received between %2$s and %3$s."
+msgstr ""
+
+#: src/Surge.php:349
+msgid "The master ticket could not be created."
+msgstr ""
+
+#: src/Surge.php:371
+msgid "You are not allowed to create problems."
+msgstr ""
+
+#: src/Surge.php:376
+msgid "Problem opened by Surge from %d similar tickets."
+msgstr ""
+
+#: src/Surge.php:383
+msgid "The problem could not be created."
+msgstr ""
+
+#: src/Surge.php:48
+msgid "New"
+msgstr ""
+
+#: src/Surge.php:49
+msgid "In progress"
+msgstr ""
+
+#: src/Surge.php:50
+msgid "Resolved"
+msgstr ""
+
+#: src/Surge.php:51
+msgid "Dismissed"
+msgstr ""
+
+#: src/Surge.php:60
+msgid "Detect bursts of similar tickets (major incidents)"
+msgstr ""
+
+#: src/Surge.php:71
+msgid "%d new surge(s)"
+msgstr ""
+
+#: src/TicketHooks.php:82
+msgid "Master ticket of surge #%1$d — %2$d linked tickets."
+msgstr ""
+
+#: src/TicketHooks.php:83
+msgid "Part of surge #%1$d — %2$d similar tickets in %3$d min."
+msgstr ""
+
+#: src/TicketHooks.php:85
+msgid "Master ticket: #%d."
+msgstr ""
+
+#: src/TicketHooks.php:88
+msgid "Open surge"
+msgstr ""
+
+#: src/Ui.php:56
+msgid "Bursts of similar tickets, handled as one major incident"
+msgstr ""
+
+#: src/Ui.php:91
+msgid "Ticket arrivals"
+msgstr ""

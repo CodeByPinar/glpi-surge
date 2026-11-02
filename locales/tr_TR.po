@@ -1,0 +1,584 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Surge\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: front/config.php:20
+msgid "Settings saved."
+msgstr "Ayarlar kaydedildi."
+
+#: front/config.php:24 src/Ui.php:53
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: front/config.php:34
+msgid "Very high"
+msgstr "Çok yüksek"
+
+#: front/config.php:34
+msgid "High"
+msgstr "Yüksek"
+
+#: front/config.php:34
+msgid "Medium"
+msgstr "Orta"
+
+#: front/config.php:34
+msgid "Low"
+msgstr "Düşük"
+
+#: front/config.php:34
+msgid "Very low"
+msgstr "Çok düşük"
+
+#: front/config.php:37
+msgid "Handling"
+msgstr "Ele alma"
+
+#: front/config.php:38
+msgid "Master ticket urgency"
+msgstr "Ana kaydın aciliyeti"
+
+#: front/config.php:39
+msgid "Master ticket impact"
+msgstr "Ana kaydın etkisi"
+
+#: front/config.php:40
+msgid "Solving the master ticket solves every linked ticket"
+msgstr "Ana kayıt çözülünce bağlı tüm kayıtlar çözülsün"
+
+#: front/config.php:40
+msgid "The same solution text is added to each open ticket of the surge; GLPI notifies the requesters as usual."
+msgstr "Aynı çözüm metni toplu olaydaki her açık kayda eklenir; GLPI talep edenlere her zamanki gibi bildirim gönderir."
+
+#: front/config.php:41
+msgid "Link late tickets to the master automatically"
+msgstr "Sonradan gelen kayıtları ana kayda otomatik bağla"
+
+#: front/config.php:41
+msgid "Tickets that join a surge after its master ticket was created become its children too."
+msgstr "Ana kayıt açıldıktan sonra toplu olaya katılan kayıtlar da onun alt kaydı olur."
+
+#: front/config.php:42
+msgid "A surge keeps collecting tickets for (hours after its last ticket)"
+msgstr "Toplu olay, son kaydından sonra kaç saat daha kayıt toplasın"
+
+#: front/config.php:46
+msgid "Webhook"
+msgstr "Webhook"
+
+#: front/config.php:47
+msgid "URL"
+msgstr "Adres"
+
+#: front/config.php:48
+msgid "Format"
+msgstr "Biçim"
+
+#: front/config.php:48
+msgid "Generic JSON"
+msgstr "Genel JSON"
+
+#: front/config.php:49
+msgid "Sent when a surge is detected, gets a master ticket and is resolved. GLPI proxy settings are used. Leave empty to disable."
+msgstr "Toplu olay tespit edildiğinde, ana kayıt açıldığında ve çözüldüğünde gönderilir. GLPI vekil sunucu ayarları kullanılır. Kapatmak için boş bırakın."
+
+#: front/config.php:50
+msgid "Example payload"
+msgstr "Örnek içerik"
+
+#: front/config.php:56 front/rules.php:87
+msgid "Save"
+msgstr "Kaydet"
+
+#: front/rules.php:102
+msgid "Test on current tickets"
+msgstr "Mevcut kayıtlarla dene"
+
+#: front/rules.php:103
+msgid "%1$d open ticket(s) in the last %2$d minutes that are not in a surge yet"
+msgstr "Son %2$d dakikada açılmış, henüz bir toplu olaya girmemiş %1$d açık kayıt"
+
+#: front/rules.php:114
+msgid "would become a surge"
+msgstr "toplu olay olurdu"
+
+#: front/rules.php:114
+msgid "similar, below the threshold"
+msgstr "benzer, eşiğin altında"
+
+#: front/rules.php:122
+msgid "No similar tickets in the window right now."
+msgstr "Şu anda bu zaman aralığında benzer kayıt yok."
+
+#: front/rules.php:26
+msgid "Rule deleted."
+msgstr "Kural silindi."
+
+#: front/rules.php:30
+msgid "Rule saved."
+msgstr "Kural kaydedildi."
+
+#: front/rules.php:34 src/Ui.php:52
+msgid "Detection rules"
+msgstr "Tespit kuralları"
+
+#: front/rules.php:38
+msgid "New rule"
+msgstr "Yeni kural"
+
+#: front/rules.php:39 front/rules.php:62
+msgid "Rule"
+msgstr "Kural"
+
+#: front/rules.php:39 front/rules.php:71
+msgid "Condition"
+msgstr "Koşul"
+
+#: front/rules.php:40 front/rules.php:65
+msgid "Entity"
+msgstr "Birim"
+
+#: front/rules.php:40 front/rules.php:64
+msgid "Active"
+msgstr "Etkin"
+
+#: front/rules.php:45
+msgid "(and sub-entities)"
+msgstr "(ve alt birimler)"
+
+#: front/rules.php:63
+msgid "Name"
+msgstr "Ad"
+
+#: front/rules.php:67
+msgid "Include sub-entities"
+msgstr "Alt birimleri dahil et"
+
+#: front/rules.php:68
+msgid "Comment"
+msgstr "Açıklama"
+
+#: front/rules.php:72
+msgid "At least (tickets)"
+msgstr "En az (kayıt)"
+
+#: front/rules.php:73
+msgid "Within (minutes)"
+msgstr "Süre (dakika)"
+
+#: front/rules.php:74
+msgid "Same category"
+msgstr "Aynı kategori"
+
+#: front/rules.php:74
+msgid "Tickets without a category are grouped together."
+msgstr "Kategorisi olmayan kayıtlar kendi aralarında gruplanır."
+
+#: front/rules.php:75
+msgid "Same location"
+msgstr "Aynı konum"
+
+#: front/rules.php:76
+msgid "Similar title / description"
+msgstr "Benzer başlık / açıklama"
+
+#: front/rules.php:76
+msgid "Turn off to group by category / location only (e.g. \"any 10 tickets about the VPN in 15 minutes\")."
+msgstr "Yalnız kategori / konuma göre gruplamak için kapatın (ör. \"15 dakikada VPN hakkında herhangi 10 kayıt\")."
+
+#: front/rules.php:77
+msgid "Text similarity threshold"
+msgstr "Metin benzerlik eşiği"
+
+#: front/rules.php:78
+msgid "0.25 loose · 0.35 balanced · 0.5 strict. Use \"Save and test\" to tune it on the current tickets."
+msgstr "0,25 gevşek · 0,35 dengeli · 0,5 sıkı. Mevcut kayıtlarla ayarlamak için \"Kaydet ve dene\"yi kullanın."
+
+#: front/rules.php:79
+msgid "Ticket type"
+msgstr "Kayıt türü"
+
+#: front/rules.php:80
+msgid "Any"
+msgstr "Hepsi"
+
+#: front/rules.php:80
+msgid "Incidents only"
+msgstr "Yalnız olaylar"
+
+#: front/rules.php:80
+msgid "Requests only"
+msgstr "Yalnız istekler"
+
+#: front/rules.php:83
+msgid "Only these categories"
+msgstr "Yalnız bu kategoriler"
+
+#: front/rules.php:83
+msgid "empty = all"
+msgstr "boş = tümü"
+
+#: front/rules.php:88
+msgid "Save and test"
+msgstr "Kaydet ve dene"
+
+#: front/rules.php:89
+msgid "Back"
+msgstr "Geri"
+
+#: front/rules.php:91
+msgid "Delete this rule? Surges it found are kept."
+msgstr "Bu kural silinsin mi? Bulduğu toplu olaylar korunur."
+
+#: front/rules.php:91
+msgid "Delete"
+msgstr "Sil"
+
+#: front/surge.form.php:105 front/surge.form.php:130 front/surge.php:70
+msgid "Tickets"
+msgstr "Kayıtlar"
+
+#: front/surge.form.php:106
+msgid "Time span"
+msgstr "Süre"
+
+#: front/surge.form.php:106
+msgid "%d min"
+msgstr "%d dk"
+
+#: front/surge.form.php:107 front/surge.php:71
+msgid "Category / location"
+msgstr "Kategori / konum"
+
+#: front/surge.form.php:108
+msgid "Detected by"
+msgstr "Tespit eden kural"
+
+#: front/surge.form.php:113 front/surge.php:71
+msgid "Arrivals"
+msgstr "Geliş zamanları"
+
+#: front/surge.form.php:116
+msgid "Common words"
+msgstr "Ortak kelimeler"
+
+#: front/surge.form.php:131
+msgid "Ticket"
+msgstr "Kayıt"
+
+#: front/surge.form.php:131
+msgid "Requester"
+msgstr "Talep eden"
+
+#: front/surge.form.php:131
+msgid "Opened"
+msgstr "Açılış"
+
+#: front/surge.form.php:131 front/surge.php:70
+msgid "Status"
+msgstr "Durum"
+
+#: front/surge.form.php:132
+msgid "Text similarity to the surge"
+msgstr "Toplu olayla metin benzerliği"
+
+#: front/surge.form.php:132
+msgid "Match"
+msgstr "Benzerlik"
+
+#: front/surge.form.php:142
+msgid "Not part of this incident"
+msgstr "Bu olaya ait değil"
+
+#: front/surge.form.php:150
+msgid "Major incident"
+msgstr "Büyük olay"
+
+#: front/surge.form.php:152
+msgid "Master ticket"
+msgstr "Ana kayıt"
+
+#: front/surge.form.php:154
+msgid "Master ticket title"
+msgstr "Ana kayıt başlığı"
+
+#: front/surge.form.php:154 src/Surge.php:330
+msgid "[Major incident] %s"
+msgstr "[Büyük olay] %s"
+
+#: front/surge.form.php:155
+msgid "Create master ticket and link all"
+msgstr "Ana kayıt aç ve hepsini bağla"
+
+#: front/surge.form.php:156
+msgid "Every ticket of the surge becomes a child of the master. New tickets joining the surge are linked automatically."
+msgstr "Toplu olaydaki her kayıt ana kaydın alt kaydı olur. Sonradan katılan kayıtlar otomatik bağlanır."
+
+#: front/surge.form.php:161
+msgid "Create a problem and link all"
+msgstr "Sorun aç ve hepsini bağla"
+
+#: front/surge.form.php:168
+msgid "Tell everyone"
+msgstr "Herkesi bilgilendir"
+
+#: front/surge.form.php:169
+msgid "e.g. We are aware of the mail outage and working on it. Next update at 10:30."
+msgstr "ör. E-posta kesintisinden haberdarız ve üzerinde çalışıyoruz. Bir sonraki bilgilendirme 10:30'da."
+
+#: front/surge.form.php:170
+msgid "Add as public follow-up to all open tickets"
+msgstr "Tüm açık kayıtlara herkese açık takip olarak ekle"
+
+#: front/surge.form.php:172
+msgid "Resolve"
+msgstr "Çöz"
+
+#: front/surge.form.php:173
+msgid "e.g. The mail server was restarted at 10:12; mail works again."
+msgstr "ör. E-posta sunucusu 10:12'de yeniden başlatıldı; e-posta yeniden çalışıyor."
+
+#: front/surge.form.php:174
+msgid "Solve every open ticket of this surge with this solution?"
+msgstr "Bu toplu olaydaki tüm açık kayıtlar bu çözümle çözülsün mü?"
+
+#: front/surge.form.php:174
+msgid "Solve all tickets"
+msgstr "Tüm kayıtları çöz"
+
+#: front/surge.form.php:175
+msgid "Solving the master ticket in GLPI does the same automatically."
+msgstr "Ana kaydı GLPI'da çözmek de aynısını otomatik yapar."
+
+#: front/surge.form.php:179
+msgid "Acknowledged by %1$s on %2$s"
+msgstr "%1$s tarafından %2$s tarihinde üstlenildi"
+
+#: front/surge.form.php:38
+msgid "Master ticket #%d created and linked."
+msgstr "#%d numaralı ana kayıt açıldı ve bağlandı."
+
+#: front/surge.form.php:42
+msgid "Problem %d created and linked."
+msgstr "%d numaralı sorun açıldı ve bağlandı."
+
+#: front/surge.form.php:46
+msgid "Write the message first."
+msgstr "Önce mesajı yazın."
+
+#: front/surge.form.php:49
+msgid "Follow-up added to %d ticket(s)."
+msgstr "%d kayda takip eklendi."
+
+#: front/surge.form.php:49 front/surge.form.php:56
+msgid "%d ticket(s) skipped (no right)."
+msgstr "%d kayıt atlandı (yetki yok)."
+
+#: front/surge.form.php:53
+msgid "Write the solution first."
+msgstr "Önce çözümü yazın."
+
+#: front/surge.form.php:56
+msgid "%d ticket(s) solved."
+msgstr "%d kayıt çözüldü."
+
+#: front/surge.form.php:90
+msgid "Acknowledge"
+msgstr "Üstlen"
+
+#: front/surge.form.php:93
+msgid "Not a real incident? The tickets stay as they are."
+msgstr "Gerçek bir olay değil mi? Kayıtlar olduğu gibi kalır."
+
+#: front/surge.form.php:93
+msgid "Dismiss"
+msgstr "Yok say"
+
+#: front/surge.form.php:94
+msgid "Reopen"
+msgstr "Yeniden aç"
+
+#: front/surge.php:24
+msgid "Detection finished: %1$d new surge(s), %2$d ticket(s) added to existing ones."
+msgstr "Tespit tamamlandı: %1$d yeni toplu olay, mevcutlara %2$d kayıt eklendi."
+
+#: front/surge.php:38 src/Ui.php:50
+msgid "Surges"
+msgstr "Toplu olaylar"
+
+#: front/surge.php:45
+msgid "Open"
+msgstr "Açık"
+
+#: front/surge.php:49
+msgid "All"
+msgstr "Tümü"
+
+#: front/surge.php:56
+msgid "Run detection now"
+msgstr "Şimdi tespit et"
+
+#: front/surge.php:64
+msgid "No surge here. All quiet."
+msgstr "Toplu olay yok. Her şey sakin."
+
+#: front/surge.php:65
+msgid "%d active detection rule."
+msgid_plural "%d active detection rules."
+msgstr[0] "%d etkin tespit kuralı."
+msgstr[1] "%d etkin tespit kuralı."
+
+#: front/surge.php:70 src/Surge.php:41
+msgid "Surge"
+msgid_plural "Surges"
+msgstr[0] "Toplu olay"
+msgstr[1] "Toplu olaylar"
+
+#: front/surge.php:71
+msgid "First / last ticket"
+msgstr "İlk / son kayıt"
+
+#: front/surge.php:72
+msgid "Master ticket / problem"
+msgstr "Ana kayıt / sorun"
+
+#: hook.php:87 front/rules.php:57
+msgid "Same category, similar text"
+msgstr "Aynı kategori, benzer metin"
+
+#: hook.php:88
+msgid "Default rule: 5 or more open tickets in 30 minutes, same category, similar title or description."
+msgstr "Varsayılan kural: 30 dakikada aynı kategoride, başlığı ya da açıklaması benzer 5 veya daha fazla açık kayıt."
+
+#: src/Notifier.php:36
+msgid "Surge detected"
+msgstr "Toplu olay tespit edildi"
+
+#: src/Notifier.php:37
+msgid "Major incident opened"
+msgstr "Büyük olay kaydı açıldı"
+
+#: src/Notifier.php:38
+msgid "Surge resolved"
+msgstr "Toplu olay çözüldü"
+
+#: src/Profile.php:55
+msgid "See surges"
+msgstr "Toplu olayları gör"
+
+#: src/Profile.php:56
+msgid "Handle surges (master ticket, problem, broadcast, resolve)"
+msgstr "Toplu olayları yönet (ana kayıt, sorun, toplu bilgilendirme, çözüm)"
+
+#: src/Profile.php:57
+msgid "Detection rules and settings"
+msgstr "Tespit kuralları ve ayarlar"
+
+#: src/Rule.php:102
+msgid "≥ %1$d tickets in %2$d min"
+msgstr "%2$d dk içinde ≥ %1$d kayıt"
+
+#: src/Rule.php:104
+msgid "same category"
+msgstr "aynı kategori"
+
+#: src/Rule.php:107
+msgid "same location"
+msgstr "aynı konum"
+
+#: src/Rule.php:110
+msgid "similar text (%d %%)"
+msgstr "benzer metin (%%%d)"
+
+#: src/Rule.php:113
+msgid "incidents only"
+msgstr "yalnız olaylar"
+
+#: src/Rule.php:115
+msgid "requests only"
+msgstr "yalnız istekler"
+
+#: src/Rule.php:63
+msgid "Unnamed rule"
+msgstr "Adsız kural"
+
+#: src/Surge.php:318 src/Surge.php:365
+msgid "Surge not found."
+msgstr "Toplu olay bulunamadı."
+
+#: src/Surge.php:324
+msgid "You are not allowed to create tickets."
+msgstr "Kayıt açma yetkiniz yok."
+
+#: src/Surge.php:332
+msgid "Major incident opened by Surge from %1$d similar tickets received between %2$s and %3$s."
+msgstr "Surge tarafından, %2$s ile %3$s arasında gelen %1$d benzer kayıttan açılan büyük olay kaydı."
+
+#: src/Surge.php:349
+msgid "The master ticket could not be created."
+msgstr "Ana kayıt açılamadı."
+
+#: src/Surge.php:371
+msgid "You are not allowed to create problems."
+msgstr "Sorun açma yetkiniz yok."
+
+#: src/Surge.php:376
+msgid "Problem opened by Surge from %d similar tickets."
+msgstr "Surge tarafından %d benzer kayıttan açılan sorun."
+
+#: src/Surge.php:383
+msgid "The problem could not be created."
+msgstr "Sorun açılamadı."
+
+#: src/Surge.php:48
+msgid "New"
+msgstr "Yeni"
+
+#: src/Surge.php:49
+msgid "In progress"
+msgstr "Ele alınıyor"
+
+#: src/Surge.php:50
+msgid "Resolved"
+msgstr "Çözüldü"
+
+#: src/Surge.php:51
+msgid "Dismissed"
+msgstr "Yok sayıldı"
+
+#: src/Surge.php:60
+msgid "Detect bursts of similar tickets (major incidents)"
+msgstr "Kısa sürede gelen benzer kayıtları (büyük olayları) tespit et"
+
+#: src/Surge.php:71
+msgid "%d new surge(s)"
+msgstr "%d yeni toplu olay"
+
+#: src/TicketHooks.php:82
+msgid "Master ticket of surge #%1$d — %2$d linked tickets."
+msgstr "#%1$d numaralı toplu olayın ana kaydı — %2$d bağlı kayıt."
+
+#: src/TicketHooks.php:83
+msgid "Part of surge #%1$d — %2$d similar tickets in %3$d min."
+msgstr "#%1$d numaralı toplu olayın parçası — %3$d dk içinde %2$d benzer kayıt."
+
+#: src/TicketHooks.php:85
+msgid "Master ticket: #%d."
+msgstr "Ana kayıt: #%d."
+
+#: src/TicketHooks.php:88
+msgid "Open surge"
+msgstr "Toplu olayı aç"
+
+#: src/Ui.php:56
+msgid "Bursts of similar tickets, handled as one major incident"
+msgstr "Kısa sürede gelen benzer kayıtlar, tek bir büyük olay olarak"
+
+#: src/Ui.php:91
+msgid "Ticket arrivals"
+msgstr "Kayıt geliş zamanları"
